@@ -1,8 +1,6 @@
 import {
   Component,
-  EventEmitter,
   Input,
-  Output
 } from '@angular/core';
 
 @Component({
@@ -15,18 +13,16 @@ import {
       <div>Price: £{{event.price}}</div>
       <div>
         <span>Location: {{event.location.address}}</span>
-        <span>&nbsp;</span>
-        <span>{{event.location.city}}, {{event.location.country}}</span>
+        <span class="pad-left">{{event.location.city}}, {{event.location.country}}</span>
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    .pad-left { margin-left: 10px; }
+    .well div { color: red; }
+  `]
 })
 export class EventThumbnailComponent {
 
   @Input() event: any;
-  property: string = 'a nice string';
-
-  logFoo(): void {
-    console.log('foo');
-  }
 }
