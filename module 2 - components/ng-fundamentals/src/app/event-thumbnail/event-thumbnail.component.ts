@@ -18,16 +18,15 @@ import {
         <span>&nbsp;</span>
         <span>{{event.location.city}}, {{event.location.country}}</span>
       </div>
-      <button class="btn  btn-primary" (click)="handleClick()">Click me!</button>
     </div>
   `
 })
 export class EventThumbnailComponent {
 
   @Input() event: any;
-  @Output() onClick: EventEmitter<string> = new EventEmitter<string>();
+  property: string = 'a nice string';
 
-  public handleClick() {
-    this.onClick.emit(this.event.name);
+  logFoo(): void {
+    console.log('foo');
   }
 }
