@@ -27,7 +27,7 @@ import {
   `,
   styles: [`
     .pad-left { margin-left: 10px; }
-    .well div { color: red; }
+    .well div { color: #bbb; }
     .thumbnail { min-height: 240px;}
     .green { color: #003300 !important; }
     .bold { font-weight: bold; }
