@@ -20,6 +20,7 @@ import {
   styles: [`
     .pad-left { margin-left: 10px; }
     .well div { color: red; }
+    .thumbnail { min-height: 210px;}
   `]
 })
 export class EventThumbnailComponent {

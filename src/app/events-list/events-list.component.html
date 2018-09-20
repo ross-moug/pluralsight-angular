@@ -4,5 +4,9 @@
   <div class="well">
     <div>Hello World</div>
   </div>
-  <event-thumbnail #thumbnail [event]="event"></event-thumbnail>
+  <div class="row">
+    <div *ngFor="let event of events" class="col-md-5">
+      <event-thumbnail #thumbnail [event]="event"></event-thumbnail>
+    </div>
+  </div>
 </div>
