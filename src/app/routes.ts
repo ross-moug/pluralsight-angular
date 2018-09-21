@@ -4,10 +4,13 @@ import { EventsDetailsComponent } from './components/events-details/events-detai
 import { EventsListComponent } from './components/events-list/events-list.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { EventRouteActivatorGuard } from './guards/event-route-activator.guard';
+import { EventListResolverService } from './services/event-list-resolver.service';
 
 export const routes: Routes = [
     { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
-    { path: 'events', component: EventsListComponent },
+    { path: 'events', component: EventsListComponent, resolve: {
+        events: EventListResolverService
+    } },
     { path: 'events/:id', component: EventsDetailsComponent, canActivate: [EventRouteActivatorGuard] },
     { path: '404', component: NotFoundComponent },
     { path: '', component: EventsListComponent, pathMatch: 'full' },
