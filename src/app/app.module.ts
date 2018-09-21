@@ -13,6 +13,7 @@ import { ToastService } from './services/toast.service';
 import { EventsDetailsComponent } from './components/events-details/events-details.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
+import { EventRouteActivatorService } from './services/event-route-activator.service';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,19 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
   ],
   providers: [
     EventService,
-    ToastService
+    ToastService,
+    EventRouteActivatorService,
+    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
   ],
   bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
+
+export function checkDirtyState(component: CreateEventComponent) {
+  console.log(component.isDirty);
+  if (component.isDirty) {
+    return window.confirm('You have not saved this event, do you really want to cancel?');
+  }
+
+  return true;
+}

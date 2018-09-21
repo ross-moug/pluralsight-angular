@@ -6,7 +6,7 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
 import { EventRouteActivatorService } from './services/event-route-activator.service';
 
 export const routes: Routes = [
-    { path: 'events/new', component: CreateEventComponent },
+    { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
     { path: 'events', component: EventsListComponent },
     { path: 'events/:id', component: EventsDetailsComponent, canActivate: [EventRouteActivatorService] },
     { path: '404', component: NotFoundComponent },
