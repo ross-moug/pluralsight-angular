@@ -12,6 +12,7 @@ import { EventService } from './services/event.service';
 import { ToastService } from './services/toast.service';
 import { EventsDetailsComponent } from './components/events-details/events-details.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
+import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CreateEventComponent } from './components/create-event/create-event.com
     EventThumbnailComponent,
     NavBarComponent,
     EventsDetailsComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
