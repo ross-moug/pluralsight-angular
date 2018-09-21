@@ -11,6 +11,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { EventService } from './services/event.service';
 import { ToastService } from './services/toast.service';
 import { EventsDetailsComponent } from './components/events-details/events-details.component';
+import { CreateEventComponent } from './components/create-event/create-event.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EventsDetailsComponent } from './components/events-details/events-detai
     EventsListComponent,
     EventThumbnailComponent,
     NavBarComponent,
-    EventsDetailsComponent
+    EventsDetailsComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,
