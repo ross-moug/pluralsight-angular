@@ -316,8 +316,13 @@ const events: any = [
   providedIn: 'root'
 })
 export class EventService {
-  
+
   getEvents(): any {
     return events;
+  }
+
+  getEvent(id: number): any {
+      console.log(id);
+    return events.find(event => event.id === id);
   }
 }
