@@ -13,6 +13,6 @@ export const routes: Routes = [
     } },
     { path: 'events/:id', component: EventsDetailsComponent, canActivate: [EventRouteActivatorGuard] },
     { path: '404', component: NotFoundComponent },
-    { path: '', component: EventsListComponent, pathMatch: 'full' },
+    { path: '', redirectTo: 'events', pathMatch: 'full' },
     { path: 'user', loadChildren: './user/user.module#UserModule' },
 ];
