@@ -21,7 +21,7 @@ export class LoginComponent {
   }
 
   public login(value: any) {
-    this.authService.loginUser(value.username, value.password);
+    this.authService.loginUser(value.userName, value.password);
     this.router.navigate(['events']);
   }
 
