@@ -1,3 +1,4 @@
+import { isDefined } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { User } from '../components/models/user.model';
 
@@ -18,5 +19,10 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.currentUser;
+  }
+
+  public updateCurrentUser(firstName: string, lastName: string) {
+    this.currentUser.firstName = firstName;
+    this.currentUser.lastName = lastName;
   }
 }
