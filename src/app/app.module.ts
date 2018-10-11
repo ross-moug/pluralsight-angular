@@ -1,3 +1,7 @@
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -33,6 +37,8 @@ import { EventRouteActivatorGuard } from './guards/index';
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     EventService,
