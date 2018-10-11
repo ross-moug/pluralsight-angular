@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import { Router } from '@angular/router'
+
 import { EventService } from '../../services';
+import { Event } from '../models';
 
 @Component({
   templateUrl: './create-event.component.html',
@@ -34,7 +39,7 @@ import { EventService } from '../../services';
 })
 export class CreateEventComponent {
   isDirty = true;
-  newEvent: any;
+  event: Event;
 
   constructor(
     private router: Router,
