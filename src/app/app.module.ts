@@ -23,6 +23,7 @@ import {
   EventListResolverService
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
+import { CreateSessionComponent } from './components/create-session/create-session.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { EventRouteActivatorGuard } from './guards/index';
     NavBarComponent,
     EventsDetailsComponent,
     CreateEventComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreateSessionComponent
   ],
   imports: [
     BrowserModule,
