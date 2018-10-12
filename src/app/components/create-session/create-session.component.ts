@@ -55,7 +55,7 @@ export class CreateSessionComponent implements OnInit {
       duration: +value.duration,
       level: value.level,
       presenter: value.presenter,
-      abstract: value.abstract.,
+      abstract: value.abstract,
       voters: []
     };
 
