@@ -25,6 +25,7 @@ import {
 import { EventRouteActivatorGuard } from './guards/index';
 import { CreateSessionComponent } from './components/create-session/create-session.component';
 import { SessionListComponent } from './components/session-list/session-list.component';
+import { CollapisbleWellComponent } from './components/collapisble-well/collapisble-well.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SessionListComponent } from './components/session-list/session-list.com
     CreateEventComponent,
     NotFoundComponent,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    CollapisbleWellComponent
   ],
   imports: [
     BrowserModule,
