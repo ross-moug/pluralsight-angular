@@ -5,7 +5,7 @@ import {
 import { Router } from '@angular/router'
 
 import { EventService } from '../../services';
-import { Event } from '../models';
+import { Event } from '../../models';
 
 @Component({
   templateUrl: './create-event.component.html',
