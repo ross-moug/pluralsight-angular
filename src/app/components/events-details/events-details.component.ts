@@ -3,7 +3,10 @@ import {
   OnInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from '../../models';
+import {
+  Event,
+  Session
+} from '../../models';
 import { EventService } from '../../services/event.service';
 
 @Component({
@@ -17,10 +20,15 @@ import { EventService } from '../../services/event.service';
       .event-image {
           height: 100px;
       }
+
+      a {
+          cursor: pointer;
+      }
   `]
 })
 export class EventsDetailsComponent implements OnInit {
   event: Event;
+  addMode: boolean;
 
   constructor(
     private eventService: EventService,
@@ -32,4 +40,19 @@ export class EventsDetailsComponent implements OnInit {
     console.log(this.event);
   }
 
+  addSession() {
+    this.addMode = true;
+  }
+
+  saveNewSession(session: Session): void {
+    const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
+    session.id = nextId;
+    this.event.sessions.push(session);
+    this.eventService.updateEvent(this.event);
+    this.addMode = false;
+  }
+
+  cancelAddSession(): void {
+    this.addMode = false;
+  }
 }

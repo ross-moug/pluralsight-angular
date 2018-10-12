@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,10 +13,15 @@ import { Session } from '../../models';
 import { restrictedWords } from '../../validators';
 
 @Component({
+  selector: 'create-session',
   templateUrl: './create-session.component.html',
   styleUrls: ['./create-session.component.css']
 })
 export class CreateSessionComponent implements OnInit {
+  @Output()
+  saveNewSession: EventEmitter<Session> = new EventEmitter<Session>();
+  @Output()
+  cancelAddSession: EventEmitter<void> = new EventEmitter<void>();
   name: FormControl;
   presenter: FormControl;
   duration: FormControl;
@@ -19,7 +29,8 @@ export class CreateSessionComponent implements OnInit {
   abstract: FormControl;
   newSessionForm: FormGroup;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.name = new FormControl('', Validators.required);
@@ -37,7 +48,7 @@ export class CreateSessionComponent implements OnInit {
     });
   }
 
-  public saveSession(value: any) {
+  saveSession(value: any) {
     const session: Session = {
       id: undefined,
       name: value.name,
@@ -47,5 +58,11 @@ export class CreateSessionComponent implements OnInit {
       abstract: value.abstract.,
       voters: []
     };
+
+    this.saveNewSession.emit(session);
+  }
+
+  cancel(): void {
+    this.cancelAddSession.emit();
   }
 }
