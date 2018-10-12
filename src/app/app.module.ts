@@ -24,6 +24,7 @@ import {
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
 import { CreateSessionComponent } from './components/create-session/create-session.component';
+import { SessionListComponent } from './components/session-list/session-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CreateSessionComponent } from './components/create-session/create-sessi
     EventsDetailsComponent,
     CreateEventComponent,
     NotFoundComponent,
-    CreateSessionComponent
+    CreateSessionComponent,
+    SessionListComponent
   ],
   imports: [
     BrowserModule,

@@ -5,3 +5,4 @@ export * from  './event-thumbnail/event-thumbnail.component';
 export * from  './events-details/events-details.component';
 export * from  './events-list/events-list.component';
 export * from  './nav-bar/nav-bar.component';
+export * from  './session-list/session-list.component';
