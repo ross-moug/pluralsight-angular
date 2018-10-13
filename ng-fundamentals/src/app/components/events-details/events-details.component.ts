@@ -29,6 +29,7 @@ import { EventService } from '../../services/event.service';
 export class EventsDetailsComponent implements OnInit {
   event: Event;
   addMode: boolean;
+  filterBy: string = 'all';
 
   constructor(
     private eventService: EventService,
