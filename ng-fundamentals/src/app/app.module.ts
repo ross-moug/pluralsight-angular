@@ -14,18 +14,18 @@ import {
   NavBarComponent,
   EventsDetailsComponent,
   CreateEventComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  CreateSessionComponent,
+  SessionListComponent,
+  CollapsibleWellComponent
  } from './components/index';
-
 import {
   EventService,
   ToastService,
   EventListResolverService
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
-import { CreateSessionComponent } from './components/create-session/create-session.component';
-import { SessionListComponent } from './components/session-list/session-list.component';
-import { CollapisbleWellComponent } from './components/collapisble-well/collapisble-well.component';
+import { DurationPipe } from './pipes/index';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { CollapisbleWellComponent } from './components/collapisble-well/collapis
     NotFoundComponent,
     CreateSessionComponent,
     SessionListComponent,
-    CollapisbleWellComponent
+    CollapsibleWellComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,

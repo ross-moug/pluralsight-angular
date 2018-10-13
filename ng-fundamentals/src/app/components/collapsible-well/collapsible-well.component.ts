@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'collapisble-well',
-  templateUrl: './collapisble-well.component.html'
+  selector: 'collapsible-well',
+  templateUrl: './collapsible-well.component.html'
 })
-export class CollapisbleWellComponent {
+export class CollapsibleWellComponent {
   visible: boolean = true;
 
   toggleContent() {
