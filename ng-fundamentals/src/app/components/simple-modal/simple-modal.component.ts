@@ -17,7 +17,7 @@ export class SimpleModalComponent {
   private containerElement: ElementRef;
 
   constructor(
-    @Inject(JQUERY_TOKEN) private jQuery: Object
+    @Inject(JQUERY_TOKEN) private jQuery: any
   ) { }
 
   closeModal(): void {
