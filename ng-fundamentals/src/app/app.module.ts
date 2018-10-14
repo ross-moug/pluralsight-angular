@@ -55,7 +55,8 @@ const toastr: Toastr = window['toastr'];
     { provide: TOASTR_TOKEN, useValue: toastr },
     EventRouteActivatorGuard,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState},
-    EventListResolverService
+    EventListResolverService,
+  { provide: JQUERY_TOKEN, useValue: jQuery },
   ],
   bootstrap: [EventsAppComponent]
 })
