@@ -31,7 +31,7 @@ import {
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
 import { DurationPipe } from './pipes/index';
-import { ModalTriggerDirective } from './directives/index';
+import { ModalTriggerDirective, LocationValidatorDirective } from './directives/index';
 
 const toastr: Toastr = window['toastr'];
 const jQuery: Object = window['$'];
@@ -51,7 +51,8 @@ const jQuery: Object = window['$'];
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpVoteComponent
+    UpVoteComponent,
+    LocationValidatorDirective
   ],
   imports: [
     BrowserModule,
