@@ -38,8 +38,10 @@ export class EventsDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
-    console.log(this.event);
+    this.route.params.forEach(params => {
+      this.event= this.eventService.getEvent(+params['id']);
+      this.addMode = false;
+    });
   }
 
   addSession() {
