@@ -11,6 +11,8 @@ export class SimpleModalComponent {
   title: string;
   @Input()
   elementId: string;
+  @Input()
+  closeOnBodyClick: boolean;
   @ViewChild('modalContainer')
   private containerElement: ElementRef;
 
@@ -19,6 +21,8 @@ export class SimpleModalComponent {
   ) { }
 
   closeModal(): void {
-    this.jQuery(this.containerElement.nativeElement).modal('hide');
+    if (this.closeOnBodyClick) {
+      this.jQuery(this.containerElement.nativeElement).modal('hide');
+    }
   }
 }
