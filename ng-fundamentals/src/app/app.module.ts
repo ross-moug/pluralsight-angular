@@ -23,12 +23,14 @@ import {
   EventService,
   TOASTR_TOKEN,
   Toastr,
-  EventListResolverService
+  EventListResolverService,
+  JQUERY_TOKEN,
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
 import { DurationPipe } from './pipes/index';
 
 const toastr: Toastr = window['toastr'];
+const jQuery: Object = window['$'];
 
 @NgModule({
   declarations: [
