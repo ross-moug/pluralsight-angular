@@ -21,11 +21,14 @@ import {
  } from './components/index';
 import {
   EventService,
-  ToastService,
+  TOASTR_TOKEN,
+  Toastr,
   EventListResolverService
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
 import { DurationPipe } from './pipes/index';
+
+const toastr: Toastr = window['toastr'];
 
 @NgModule({
   declarations: [
@@ -49,7 +52,7 @@ import { DurationPipe } from './pipes/index';
   ],
   providers: [
     EventService,
-    ToastService,
+    { provide: TOASTR_TOKEN, useValue: toastr },
     EventRouteActivatorGuard,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState},
     EventListResolverService
