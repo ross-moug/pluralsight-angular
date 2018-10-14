@@ -5,6 +5,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { Session } from '../../models';
+import { AuthService } from '../../user/services/auth.service';
+import { VoterService } from '../../services/index';
 
 @Component({
   selector: 'session-list',
@@ -18,6 +20,11 @@ export class SessionListComponent implements OnChanges {
   @Input()
   sortBy: string;
   visibleSessions: Session[];
+
+  constructor(
+    public authService: AuthService,
+    private voterService: VoterService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.sessions) {
@@ -40,7 +47,23 @@ export class SessionListComponent implements OnChanges {
       : this.visibleSessions.sort((s1, s2) => this.sortByVotesDesc(s1, s2));
   }
 
-  sortByNameAsc(session1: Session, session2: Session): number {
+  toggleVote(session: Session): void {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(session, this.authService.currentUser.username);
+    } else {
+      this.voterService.addVoter(session, this.authService.currentUser.username);
+    }
+
+    if (this.sortBy === 'votes') {
+      this.visibleSessions.sort((s1, s2) => this.sortByVotesDesc(s1, s2));
+    }
+  }
+  
+  userHasVoted(session: Session): boolean {
+    return this.voterService.userHasVoted(session, this.authService.currentUser.username);
+  }
+
+  private sortByNameAsc(session1: Session, session2: Session): number {
     if (session1.name > session2.name) {
       return 1;
     } else if (session1.name < session2.name) {
@@ -50,7 +73,7 @@ export class SessionListComponent implements OnChanges {
     }
   }
 
-  sortByVotesDesc(session1: Session, session2: Session): number {
+  private sortByVotesDesc(session1: Session, session2: Session): number {
     return session2.voters.length - session1.voters.length;
   }
 }

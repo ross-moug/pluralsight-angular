@@ -8,3 +8,4 @@ export * from  './nav-bar/nav-bar.component';
 export * from  './session-list/session-list.component';
 export * from  './collapsible-well/collapsible-well.component';
 export * from  './simple-modal/simple-modal.component';
+export * from  './up-vote/up-vote.component';
