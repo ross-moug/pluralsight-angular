@@ -17,7 +17,8 @@ import {
   NotFoundComponent,
   CreateSessionComponent,
   SessionListComponent,
-  CollapsibleWellComponent
+  CollapsibleWellComponent,
+  SimpleModalComponent
  } from './components/index';
 import {
   EventService,
@@ -28,6 +29,7 @@ import {
 } from './services/index';
 import { EventRouteActivatorGuard } from './guards/index';
 import { DurationPipe } from './pipes/index';
+import { ModalTriggerDirective } from './directives/index';
 
 const toastr: Toastr = window['toastr'];
 const jQuery: Object = window['$'];
@@ -44,7 +46,9 @@ const jQuery: Object = window['$'];
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,

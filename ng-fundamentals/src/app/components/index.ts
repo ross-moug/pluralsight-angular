@@ -7,3 +7,4 @@ export * from  './events-list/events-list.component';
 export * from  './nav-bar/nav-bar.component';
 export * from  './session-list/session-list.component';
 export * from  './collapsible-well/collapsible-well.component';
+export * from  './simple-modal/simple-modal.component';
