@@ -50,8 +50,11 @@ export class CreateEventComponent {
   }
 
   saveEvent(value: any): void {
-    this.eventService.saveEvent(value);
-    this.isDirty = false;
-    this.router.navigate(['/events']);
+    this.eventService.saveEvent(value).subscribe(
+      () => {
+        this.isDirty = false;
+        this.router.navigate(['/events']);
+      }
+    );
   }
 }
