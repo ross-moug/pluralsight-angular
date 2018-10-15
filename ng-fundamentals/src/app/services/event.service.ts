@@ -24,7 +24,7 @@ export class EventService {
   }
 
   getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>('/api//events')
+    return this.http.get<Event[]>('/api/events')
       .pipe(catchError(this.handleError<Event[]>('getEvents', [])));
   }
 
@@ -50,7 +50,7 @@ export class EventService {
 
   private handleError<T>(operation: string = 'operation', result?: T): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
-      console.log(operation + ': an error was encountered: ' + error);
+      console.error(operation + ': an error was encountered: ' + error);
       return of(result as T);
     }
   }
