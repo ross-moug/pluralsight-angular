@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -27,9 +28,9 @@ import {
   Toastr,
   EventListResolverService,
   JQUERY_TOKEN,
-  VoterService
+  VoterService,
+  EventResolverService
 } from './services/index';
-import { EventRouteActivatorGuard } from './guards/index';
 import { DurationPipe } from './pipes/index';
 import { ModalTriggerDirective, LocationValidatorDirective } from './directives/index';
 
@@ -58,12 +59,13 @@ const jQuery: Object = window['$'];
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     EventService,
     { provide: TOASTR_TOKEN, useValue: toastr },
-    EventRouteActivatorGuard,
+    EventResolverService,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState},
     EventListResolverService,
     { provide: JQUERY_TOKEN, useValue: jQuery },

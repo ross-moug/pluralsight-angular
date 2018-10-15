@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { EventService } from './event.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Event } from '../models/event.model'
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventListResolverService implements Resolve<any> {
+export class EventListResolverService implements Resolve<Event[]> {
   constructor(private eventService: EventService) {}
 
-  resolve(): Observable<any> {
-    return this.eventService.getEvents().pipe(map(events => events));
+  resolve(): Observable<Event[]> {
+    return this.eventService.getEvents();
   }
 }
