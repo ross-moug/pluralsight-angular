@@ -9,7 +9,7 @@ import { UpVoteComponent } from "../up-vote/up-vote.component";
 import { DurationPipe } from "../../pipes";
 import { CollapsibleWellComponent } from "../collapsible-well/collapsible-well.component";
 
-describe('SessionList', () => {
+describe('SessionList (deep)', () => {
   let fixture: ComponentFixture<SessionListComponent>;
   let component: SessionListComponent;
   let nativeElement: HTMLElement;
@@ -24,15 +24,21 @@ describe('SessionList', () => {
         CollapsibleWellComponent
       ],
       providers: [
-        { provide: AuthService, useValue: {
+        {
+          provide: AuthService,
+          useValue: {
             isAuthenticated: () => true,
             currentUser: {
               userName: 'Elise'
             }
-        } },
-        { provide: VoterService, useValue: {
-          userHasVoted: () => true
-        } },
+          }
+        },
+        { 
+          provide: VoterService,
+          useValue: {
+            userHasVoted: () => true
+          } 
+        },
       ]
     });
   });
