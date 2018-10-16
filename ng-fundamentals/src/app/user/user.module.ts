@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -14,7 +15,8 @@ import { userRoutes } from './user.routes';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(userRoutes)
+    RouterModule.forChild(userRoutes),
+    HttpClientModule
   ],
   declarations: [
     ProfileComponent,
