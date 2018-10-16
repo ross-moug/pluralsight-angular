@@ -5,7 +5,7 @@ import {
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 import { routes } from './routes';
 
 import { EventsAppComponent } from './events-app.component';
@@ -57,6 +57,8 @@ const jQuery: Object = window['$'];
   ],
   imports: [
     BrowserModule,
+    // Can use the { preloadingStrategy: PreloadAllModules } to load all modules on
+    // initilisation to avoid optimistic module bundling and downloading.
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
