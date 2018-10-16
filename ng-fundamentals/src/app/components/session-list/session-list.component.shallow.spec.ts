@@ -1,11 +1,11 @@
-import { SessionListComponent } from "./session-list.component";
-import { AuthService } from "../../user/services/auth.service";
-import { VoterService } from "../../services";
-import { TestBed, ComponentFixture } from "@angular/core/testing";
-import { DebugElement } from "@angular/core";
-import { By } from "@angular/platform-browser";
-import { DurationPipe } from "../../pipes";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { SessionListComponent } from './session-list.component';
+import { AuthService } from '../../user/services/auth.service';
+import { VoterService } from '../../services';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { DurationPipe } from '../../pipes';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SessionList (shallow)', () => {
   let fixture: ComponentFixture<SessionListComponent>;
@@ -29,11 +29,11 @@ describe('SessionList (shallow)', () => {
             }
           }
         },
-        { 
+        {
           provide: VoterService,
           useValue: {
             userHasVoted: () => true
-          } 
+          }
         },
       ],
       // It is better to use fake components rather than this schema

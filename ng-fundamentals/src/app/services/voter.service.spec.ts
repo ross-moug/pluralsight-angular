@@ -1,7 +1,7 @@
-import { VoterService } from "./voter.service";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Session } from "../models";
-import { of } from "rxjs";;
+import { VoterService } from './voter.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Session } from '../models';
+import { of } from 'rxjs';
 
 describe('VoterService', () => {
   let service: VoterService;

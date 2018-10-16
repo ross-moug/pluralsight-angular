@@ -15,7 +15,7 @@ export class LoginComponent {
   userName: string;
   password: string;
   mouseoverLogin: boolean;
-  loginInvalid: boolean= false;
+  loginInvalid: boolean = false;
 
   constructor(private router: Router,
               private authService: AuthService) {

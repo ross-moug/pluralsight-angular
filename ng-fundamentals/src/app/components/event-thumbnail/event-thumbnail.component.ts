@@ -40,7 +40,7 @@ export class EventThumbnailComponent {
 
   getStartTimeStyle(): any {
     if (this.event && this.event.time === '8:00 am') {
-      return { color: '#003300', 'font-weight': 'bold'}
+      return { color: '#003300', 'font-weight': 'bold'};
     }
 
     return {};

@@ -52,6 +52,6 @@ export class EventService {
     return (error: any): Observable<T> => {
       console.error(operation + ': an error was encountered: ' + error);
       return of(result as T);
-    }
+    };
   }
 }

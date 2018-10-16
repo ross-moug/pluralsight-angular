@@ -1,7 +1,7 @@
-import { SessionListComponent } from "./session-list.component";
-import { AuthService } from "../../user/services/auth.service";
-import { VoterService } from "../../services";
-import { Session } from "../../models";
+import { SessionListComponent } from './session-list.component';
+import { AuthService } from '../../user/services/auth.service';
+import { VoterService } from '../../services';
+import { Session } from '../../models';
 
 describe('SessionList', () => {
   let component: SessionListComponent;

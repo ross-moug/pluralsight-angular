@@ -1,13 +1,13 @@
-import { SessionListComponent } from "./session-list.component";
-import { AuthService } from "../../user/services/auth.service";
-import { VoterService } from "../../services";
-import { Session } from "../../models";
-import { TestBed, ComponentFixture } from "@angular/core/testing";
-import { DebugElement } from "@angular/core";
-import { By } from "@angular/platform-browser";
-import { UpVoteComponent } from "../up-vote/up-vote.component";
-import { DurationPipe } from "../../pipes";
-import { CollapsibleWellComponent } from "../collapsible-well/collapsible-well.component";
+import { SessionListComponent } from './session-list.component';
+import { AuthService } from '../../user/services/auth.service';
+import { VoterService } from '../../services';
+import { Session } from '../../models';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { UpVoteComponent } from '../up-vote/up-vote.component';
+import { DurationPipe } from '../../pipes';
+import { CollapsibleWellComponent } from '../collapsible-well/collapsible-well.component';
 
 describe('SessionList (deep)', () => {
   let fixture: ComponentFixture<SessionListComponent>;
@@ -33,11 +33,11 @@ describe('SessionList (deep)', () => {
             }
           }
         },
-        { 
+        {
           provide: VoterService,
           useValue: {
             userHasVoted: () => true
-          } 
+          }
         },
       ]
     });
