@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 import { EventService } from '../../services';
 import { Event } from '../../models';

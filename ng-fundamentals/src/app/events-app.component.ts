@@ -11,7 +11,7 @@ import { AuthService } from './user/services/auth.service';
     <router-outlet></router-outlet>
   `
 })
-export class EventsAppComponent implements OnInit{
+export class EventsAppComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) {

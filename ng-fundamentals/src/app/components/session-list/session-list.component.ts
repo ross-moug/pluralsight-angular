@@ -28,10 +28,10 @@ export class SessionListComponent implements OnChanges {
     private voterService: VoterService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.sessions) {
       this.filterSessions(this.filterBy);
-      this.sortSessions(this.sortBy)
+      this.sortSessions(this.sortBy);
     }
   }
 
@@ -60,7 +60,7 @@ export class SessionListComponent implements OnChanges {
       this.visibleSessions.sort((s1, s2) => this.sortByVotesDesc(s1, s2));
     }
   }
-  
+
   userHasVoted(session: Session): boolean {
     return this.voterService.userHasVoted(session, this.authService.currentUser.username);
   }
