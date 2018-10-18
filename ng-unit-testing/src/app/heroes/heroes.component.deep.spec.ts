@@ -59,13 +59,5 @@ describe('HeroesComponent (deep)', () => {
         expect(debugElements[i].componentInstance.hero.name).toEqual(heroes[i].name);
       }
     });
-
-    // it('should create one li for each hero', () => {
-    //   mockHeroService.getHeroes.and.returnValue(of(heroes));
-
-    //   fixture.detectChanges();
-
-    //   expect(fixture.debugElement.queryAll(By.css('li')).length).toBe(3);
-    // });
   });
 });
