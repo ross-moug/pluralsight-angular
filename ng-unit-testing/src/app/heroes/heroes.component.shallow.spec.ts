@@ -5,6 +5,7 @@ import SpyObj = jasmine.SpyObj;
 import { of } from 'rxjs/internal/observable/of';
 import { Hero } from '../hero';
 import { EventEmitter, Input, Output, Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-hero',
@@ -16,6 +17,21 @@ class FakeHeroComponent {
 }
 
 describe('HeroesComponent (shallow)', () => {
+  const heroes: Hero[] = [{
+    id: 1,
+    name: 'SpiderDude',
+    strength: 8
+  },
+  {
+    id: 2,
+    name: 'Wonderful Woman',
+    strength: 24
+  },
+  {
+    id: 3,
+    name: 'SuperDude',
+    strength: 55
+  }];
   let fixture: ComponentFixture<HeroesComponent>;
   let component: HeroesComponent;
   let mockHeroService: SpyObj<HeroService>;
@@ -39,26 +55,19 @@ describe('HeroesComponent (shallow)', () => {
 
   describe('init', () => {
     it('should set heroes correctly from the service', () => {
-      const heroes: Hero[] = [{
-        id: 1,
-        name: 'SpiderDude',
-        strength: 8
-      },
-      {
-        id: 2,
-        name: 'Wonderful Woman',
-        strength: 24
-      },
-      {
-        id: 3,
-        name: 'SuperDude',
-        strength: 55
-      }];
       mockHeroService.getHeroes.and.returnValue(of(heroes));
 
       fixture.detectChanges();
 
       expect(component.heroes.length).toEqual(3);
+    });
+
+    it('should create one li for each hero', () => {
+      mockHeroService.getHeroes.and.returnValue(of(heroes));
+
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.queryAll(By.css('li')).length).toBe(3);
     });
   });
 });
