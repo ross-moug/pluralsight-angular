@@ -1,4 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HeroComponent } from './hero.component';
 
 describe('HeroComponent', () => {
@@ -10,6 +11,7 @@ describe('HeroComponent', () => {
       declarations: [
         HeroComponent,
       ],
+      schemas: [NO_ERRORS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(HeroComponent);
@@ -24,7 +26,7 @@ describe('HeroComponent', () => {
         strength: 3
       };
 
-      expect(component.hero.name),toEqual('SuperDude');
+      expect(component.hero.name).toEqual('SuperDude');
     });
   });
 });
