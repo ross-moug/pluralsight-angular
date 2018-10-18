@@ -4,7 +4,16 @@ import { HeroService } from '../hero.service';
 import SpyObj = jasmine.SpyObj;
 import { of } from 'rxjs/internal/observable/of';
 import { Hero } from '../hero';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { EventEmitter, Input, Output, Component } from '@angular/core';
+
+@Component({
+  selector: 'app-hero',
+  template: `<div></div>`,
+})
+class FakeHeroComponent {
+  @Input() hero: Hero;
+  @Output() delete = new EventEmitter();
+}
 
 describe('HeroesComponent (shallow)', () => {
   let fixture: ComponentFixture<HeroesComponent>;
@@ -17,11 +26,11 @@ describe('HeroesComponent (shallow)', () => {
     TestBed.configureTestingModule({
       declarations: [
         HeroesComponent,
+        FakeHeroComponent,
       ],
       providers: [
         { provide: HeroService, useValue: mockHeroService },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     });
 
     fixture = TestBed.createComponent(HeroesComponent);
