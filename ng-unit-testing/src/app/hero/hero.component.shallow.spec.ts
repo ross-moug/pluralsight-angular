@@ -1,6 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { HeroComponent } from './hero.component';
+import { By } from '@angular/platform-browser';
 
 describe('HeroComponent', () => {
   let fixture: ComponentFixture<HeroComponent>;
@@ -29,7 +30,7 @@ describe('HeroComponent', () => {
       expect(component.hero.name).toEqual('SuperDude');
     });
 
-    it('should render the hero name in an anchor tag', () => {
+    it('should render the hero name in an anchor tag using nativeElement', () => {
       component.hero = {
         id: 1,
         name: 'SuperDude',
@@ -38,6 +39,19 @@ describe('HeroComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('a').textContent).toContain('SuperDude');
+    });
+
+    it('should render the hero name in an anchor tag using debugElement', () => {
+      component.hero = {
+        id: 1,
+        name: 'SuperDude',
+        strength: 3
+      };
+      fixture.detectChanges();
+
+      const anchorDebugElement: DebugElement = fixture.debugElement.query(By.css('a'));
+
+      expect(anchorDebugElement.nativeElement.textContent).toContain('SuperDude');
     });
   });
 });
