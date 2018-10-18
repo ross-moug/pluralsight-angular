@@ -18,7 +18,7 @@ describe('HeroComponent', () => {
     component = fixture.componentInstance;
   });
 
-  describe('', () => {
+  describe('events', () => {
     it('should have the correct hero', () => {
       component.hero = {
         id: 1,
@@ -27,6 +27,17 @@ describe('HeroComponent', () => {
       };
 
       expect(component.hero.name).toEqual('SuperDude');
+    });
+
+    it('should render the hero name in an anchor tag', () => {
+      component.hero = {
+        id: 1,
+        name: 'SuperDude',
+        strength: 3
+      };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('a').textContent).toContain('SuperDude');
     });
   });
 });
