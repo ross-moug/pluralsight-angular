@@ -1,3 +1,4 @@
+import { defer } from 'rxjs/internal/observable/defer';
 import { of } from 'rxjs/internal/observable/of';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -40,6 +41,28 @@ describe('HeroesComponent', () => {
       component.delete(heroes[2]);
 
       expect(component.heroes.length).toBe(2);
+    });
+
+    it('should call deleteHero with the correct hero', () => {
+      mockHeroService.deleteHero.and.returnValue(of());
+      component.heroes = heroes;
+
+      component.delete(heroes[2]);
+
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(heroes[2]);
+    });
+
+    it('should call deleteHero and subscribe to resulting observable', () => {
+      let hasSubscribed: boolean = false;
+      mockHeroService.deleteHero.and.returnValue(defer(() => {
+        hasSubscribed = true;
+        return of();
+      }));
+      component.heroes = heroes;
+
+      component.delete(heroes[2]);
+
+      expect(hasSubscribed).toBeTruthy();
     });
   });
 });
