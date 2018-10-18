@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { HeroComponent } from './hero.component';
 import { By } from '@angular/platform-browser';
 
-describe('HeroComponent', () => {
+describe('HeroComponent (shallow)', () => {
   let fixture: ComponentFixture<HeroComponent>;
   let component: HeroComponent;
 
