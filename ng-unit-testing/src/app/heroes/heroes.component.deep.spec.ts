@@ -1,10 +1,16 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import {
+  TestBed,
+  ComponentFixture
+} from '@angular/core/testing';
 import { HeroesComponent } from './heroes.component';
 import { HeroService } from '../hero.service';
 import SpyObj = jasmine.SpyObj;
 import { of } from 'rxjs/internal/observable/of';
 import { Hero } from '../hero';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import {
+  NO_ERRORS_SCHEMA,
+  DebugElement
+} from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HeroComponent } from '../hero/hero.component';
 
@@ -14,16 +20,16 @@ describe('HeroesComponent (deep)', () => {
     name: 'SpiderDude',
     strength: 8
   },
-  {
-    id: 2,
-    name: 'Wonderful Woman',
-    strength: 24
-  },
-  {
-    id: 3,
-    name: 'SuperDude',
-    strength: 55
-  }];
+    {
+      id: 2,
+      name: 'Wonderful Woman',
+      strength: 24
+    },
+    {
+      id: 3,
+      name: 'SuperDude',
+      strength: 55
+    }];
   let fixture: ComponentFixture<HeroesComponent>;
   let component: HeroesComponent;
   let mockHeroService: SpyObj<HeroService>;
@@ -58,6 +64,21 @@ describe('HeroesComponent (deep)', () => {
       for (let i = 0; i < heroes.length; i++) {
         expect(debugElements[i].componentInstance.hero.name).toEqual(heroes[i].name);
       }
+    });
+  });
+
+  describe('deleteHero', () => {
+    it(`should call heroService.deleteHero when the HeroComponent delete button is clicked`, () => {
+      mockHeroService.getHeroes.and.returnValue(of(heroes));
+
+      fixture.detectChanges();
+
+      const debugElements: DebugElement[] = fixture.debugElement.queryAll(By.directive(HeroComponent));
+      debugElements[0].query(By.css('button')).triggerEventHandler('click', {
+        stopPropagation: () => {},
+      });
+
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(heroes[0]);
     });
   });
 });
