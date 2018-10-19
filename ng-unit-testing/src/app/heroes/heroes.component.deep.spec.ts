@@ -80,5 +80,16 @@ describe('HeroesComponent (deep)', () => {
 
       expect(mockHeroService.deleteHero).toHaveBeenCalledWith(heroes[0]);
     });
+
+    it(`should call heroService.deleteHero when the HeroComponent emits a delete event`, () => {
+      mockHeroService.getHeroes.and.returnValue(of(heroes));
+
+      fixture.detectChanges();
+
+      const heroComponent: HeroComponent = fixture.debugElement.queryAll(By.directive(HeroComponent))[0].componentInstance;
+      heroComponent.delete.emit();
+
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(heroes[0]);
+    });
   });
 });
