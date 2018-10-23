@@ -80,6 +80,20 @@ describe("HeroesComponent (deep)", () => {
         expect(debugElements[i].componentInstance.hero.name).toEqual(heroes[i].name);
       }
     });
+
+    it("should have the correct route for the first hero", () => {
+      mockHeroService.getHeroes.and.returnValue(of(heroes));
+
+      fixture.detectChanges();
+
+      const debugElements: DebugElement[] = fixture.debugElement.queryAll(By.directive(HeroComponent));
+      const routerLinkStub: RouterLinkDirectiveStub = debugElements[0]
+        .query(By.directive(RouterLinkDirectiveStub)).injector.get(RouterLinkDirectiveStub);
+
+      debugElements[0].query(By.css("a")).triggerEventHandler("click", null);
+
+      expect(routerLinkStub.navigatedTo).toBe("/detail/1");
+    });
   });
 
   describe("deleteHero", () => {
