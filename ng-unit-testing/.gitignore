@@ -5,3 +5,7 @@
 
 # builds
 /dist
+
+
+# code coverage
+/coverage
