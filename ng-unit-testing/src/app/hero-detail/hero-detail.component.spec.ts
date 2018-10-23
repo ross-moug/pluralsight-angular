@@ -1,6 +1,9 @@
 import {
   TestBed,
-  ComponentFixture
+  ComponentFixture,
+  fakeAsync,
+  tick,
+  flush
 } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -58,5 +61,49 @@ describe("HeroDetailComponent", () => {
 
       expect(fixture.nativeElement.querySelector("h2").textContent).toContain("SUPERDUDE");
     });
+  });
+
+  describe("save", () => {
+    it("should call updateHero when save is called using fakeAsync and tick", fakeAsync(() => {
+      mockHeroService.getHero.and.returnValue(of({
+        id: 3,
+        name: "SuperDude",
+        strength: 100,
+      }));
+      mockHeroService.updateHero.and.returnValue(of({}));
+
+      fixture.detectChanges();
+
+      component.save();
+
+      tick(250);
+
+      expect(mockHeroService.updateHero).toHaveBeenCalledWith({
+        id: 3,
+        name: "SuperDude",
+        strength: 100,
+      });
+    }));
+
+    it("should call updateHero when save is called using fakeAsync and flush", fakeAsync(() => {
+      mockHeroService.getHero.and.returnValue(of({
+        id: 3,
+        name: "SuperDude",
+        strength: 100,
+      }));
+      mockHeroService.updateHero.and.returnValue(of({}));
+
+      fixture.detectChanges();
+
+      component.save();
+
+      flush();
+
+      expect(mockHeroService.updateHero).toHaveBeenCalledWith({
+        id: 3,
+        name: "SuperDude",
+        strength: 100,
+      });
+    }));
   });
 });
