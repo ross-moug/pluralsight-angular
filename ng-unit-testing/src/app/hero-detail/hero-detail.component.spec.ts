@@ -3,7 +3,8 @@ import {
   ComponentFixture,
   fakeAsync,
   tick,
-  flush
+  flush,
+  async
 } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -103,6 +104,27 @@ describe("HeroDetailComponent", () => {
         id: 3,
         name: "SuperDude",
         strength: 100,
+      });
+    }));
+
+    it("should call updateHero when save is called using fakeAsync and flush", async(() => {
+      mockHeroService.getHero.and.returnValue(of({
+        id: 3,
+        name: "SuperDude",
+        strength: 100,
+      }));
+      mockHeroService.updateHero.and.returnValue(of({}));
+
+      fixture.detectChanges();
+
+      component.saveWithPromise();
+
+      fixture.whenStable().then(() => {
+        expect(mockHeroService.updateHero).toHaveBeenCalledWith({
+          id: 3,
+          name: "SuperDude",
+          strength: 100,
+        });
       });
     }));
   });
