@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MessageService } from '../messages/message.service';
+import { MessageService } from './message.service';
 
 @Component({
     template: `
