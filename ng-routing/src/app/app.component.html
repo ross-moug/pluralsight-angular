@@ -21,7 +21,7 @@
                     <a>Show Messages</a>
                 </li>
                 <li *ngIf="!authService.isLoggedIn()">
-                    <a>Log In</a>
+                    <a [routerLink]="['login']">Log In</a>
                 </li>
                 <li *ngIf="authService.isLoggedIn()">
                     <a (click)="logOut()">Log Out</a>
