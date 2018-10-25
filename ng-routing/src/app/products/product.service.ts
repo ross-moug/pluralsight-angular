@@ -91,7 +91,7 @@ export class ProductService {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
         console.error(error);
-        return throwError(error.json() || 'Server error');
+        return throwError(JSON.stringify(error) || 'Server error');
     }
 
     initializeProduct(): IProduct {
