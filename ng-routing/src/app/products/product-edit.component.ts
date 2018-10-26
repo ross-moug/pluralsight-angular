@@ -1,11 +1,11 @@
 import {
   Component,
   OnInit
-} from "@angular/core";
+} from '@angular/core';
 import {
   ActivatedRoute,
   Router
-} from "@angular/router";
+} from '@angular/router';
 
 import { MessageService } from '../messages/message.service';
 
