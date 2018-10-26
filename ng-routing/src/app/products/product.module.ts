@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit.component';
 
 import { ProductFilterPipe } from './product-filter.pipe';
+import { ProductResolverService } from './product-resolver.service';
 import { ProductService } from './product.service';
 
 import { SharedModule } from '../shared/shared.module';
@@ -26,7 +27,9 @@ import { SharedModule } from '../shared/shared.module';
     ProductFilterPipe
   ],
   providers: [
-    ProductService
+    ProductService,
+    ProductResolverService,
   ]
 })
-export class ProductModule {}
+export class ProductModule {
+}
