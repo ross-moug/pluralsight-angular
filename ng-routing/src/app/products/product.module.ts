@@ -17,18 +17,23 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent, resolve: { product: ProductResolverService } },
       {
-        path: 'products/:id/edit',
-        component: ProductEditComponent,
-        resolve: { product: ProductResolverService },
+        path: 'products',
         children: [
-          { path: '', redirectTo: 'info', pathMatch: 'full' },
-          { path: 'info', component: ProductEditInfoComponent },
-          { path: 'tag', component: ProductEditTagsComponent },
+          { path: '', component: ProductListComponent, pathMatch: 'full' },
+          { path: 'products/:id', component: ProductDetailComponent, resolve: { product: ProductResolverService } },
+          {
+            path: 'products/:id/edit',
+            component: ProductEditComponent,
+            resolve: { product: ProductResolverService },
+            children: [
+              { path: '', redirectTo: 'info', pathMatch: 'full' },
+              { path: 'info', component: ProductEditInfoComponent },
+              { path: 'tag', component: ProductEditTagsComponent },
+            ]
+          },
         ]
-      },
+      }
     ])
   ],
   declarations: [
