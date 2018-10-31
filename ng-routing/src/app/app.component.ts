@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   hideMessages(): void {
+    this.router.navigate([{ outlets: { popup: null } }]);
     this.messageService.isDisplayed = false;
   }
 
