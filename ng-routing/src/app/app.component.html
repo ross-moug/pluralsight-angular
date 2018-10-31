@@ -19,7 +19,7 @@
           <a>Welcome {{ authService.currentUser.userName }}</a>
         </li>
         <li>
-          <a>Show Messages</a>
+          <a [routerLink]="[{ outlets: { popup: ['message'] } }]">Show Messages</a>
         </li>
         <li *ngIf="!authService.isLoggedIn()">
           <a [routerLink]="['login']">Log In</a>
