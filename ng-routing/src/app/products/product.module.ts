@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthGuardService } from '../user/auth-guard.service';
 import { ProductEditInfoComponent } from './product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit-tags.component';
 
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule.forChild([
       {
         path: 'products',
+        canActivate: [AuthGuardService],
         children: [
           { path: '', component: ProductListComponent, pathMatch: 'full' },
           { path: 'products/:id', component: ProductDetailComponent, resolve: { product: ProductResolverService } },
