@@ -125,7 +125,7 @@ export class ProductEditComponent implements OnInit {
     return !_.isEqual(this.currentProduct, this.originalProduct);
   }
 
-  reset(): void{
+  reset(): void {
     this.dataIsValid = null;
     this.currentProduct = null;
     this.originalProduct = null;
