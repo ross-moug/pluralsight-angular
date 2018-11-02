@@ -11,8 +11,8 @@ const routes: Route[] = [
   { path: 'welcome', component: WelcomeComponent },
   {
     path: 'products',
-    canActivate: [AuthGuardService],
-    loadChildren: 'app/products/products.module#ProductModule'
+    canLoad: [AuthGuardService],
+    loadChildren: './products/products.module#ProductModule'
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
