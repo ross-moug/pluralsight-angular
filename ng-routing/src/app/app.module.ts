@@ -9,6 +9,7 @@ import { ProductData } from './products/product-data';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 /* Feature Modules */
 import { UserModule } from './user/user.module';
@@ -28,6 +29,9 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent
+  ],
+  providers: [
+    SelectivePreloadingStrategyService
   ],
   bootstrap: [ AppComponent ]
 })
