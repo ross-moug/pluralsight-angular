@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthGuardService } from '../user/auth-guard.service';
 import { ProductEditInfoComponent } from './product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit-tags.component';
-import { ProductGuardService } from "./product-guard.service";
+import { ProductGuardService } from './product-guard.service';
 
 import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
@@ -19,23 +18,17 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     SharedModule,
     RouterModule.forChild([
+      { path: '', component: ProductListComponent, pathMatch: 'full' },
+      { path: 'products/:id', component: ProductDetailComponent, resolve: { product: ProductResolverService } },
       {
-        path: 'products',
-        canActivate: [AuthGuardService],
+        path: 'products/:id/edit',
+        component: ProductEditComponent,
+        resolve: { product: ProductResolverService },
+        canDeactivate: [ProductGuardService],
         children: [
-          { path: '', component: ProductListComponent, pathMatch: 'full' },
-          { path: 'products/:id', component: ProductDetailComponent, resolve: { product: ProductResolverService } },
-          {
-            path: 'products/:id/edit',
-            component: ProductEditComponent,
-            resolve: { product: ProductResolverService },
-            canDeactivate: [ProductGuardService],
-            children: [
-              { path: '', redirectTo: 'info', pathMatch: 'full' },
-              { path: 'info', component: ProductEditInfoComponent },
-              { path: 'tag', component: ProductEditTagsComponent },
-            ]
-          },
+          { path: '', redirectTo: 'info', pathMatch: 'full' },
+          { path: 'info', component: ProductEditInfoComponent },
+          { path: 'tag', component: ProductEditTagsComponent },
         ]
       }
     ])
