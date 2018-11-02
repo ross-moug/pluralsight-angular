@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
+  PreloadAllModules,
   Route,
   RouterModule
 } from '@angular/router';
@@ -11,7 +12,7 @@ const routes: Route[] = [
   { path: 'welcome', component: WelcomeComponent },
   {
     path: 'products',
-    canLoad: [AuthGuardService],
+    canActivate: [AuthGuardService],
     loadChildren: './products/products.module#ProductModule'
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -20,7 +21,7 @@ const routes: Route[] = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { enableTracing: true })
+    RouterModule.forRoot(routes, { enableTracing: true, preloadingStrategy: PreloadAllModules })
   ],
   exports: [
     RouterModule
