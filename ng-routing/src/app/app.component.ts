@@ -10,7 +10,7 @@ import {
   Router,
   Event
 } from '@angular/router';
-import { MessageService } from "./messages/message.service";
+import { MessageService } from './messages/message.service';
 
 import { AuthService } from './user/auth.service';
 
