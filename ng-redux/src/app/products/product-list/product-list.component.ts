@@ -1,3 +1,4 @@
+import { getShowProductCode } from './../state/product.selector';
 import {
   Component,
   OnInit,
@@ -46,8 +47,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
       (err: any) => this.errorMessage = err.error
     );
 
-    this.store.pipe(select('products')).subscribe(
-      productState => this.displayCode = productState.showProductCode
+    this.store.pipe(select(getShowProductCode)).subscribe(
+      showProductCode => this.displayCode = showProductCode
     );
   }
 
