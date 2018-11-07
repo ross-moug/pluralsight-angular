@@ -3,7 +3,10 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {
+  select,
+  Store
+} from '@ngrx/store';
 
 import { Subscription } from 'rxjs';
 
@@ -43,7 +46,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       (err: any) => this.errorMessage = err.error
     );
 
-    this.store.select('products').subscribe(
+    this.store.pipe(select('products')).subscribe(
       productState => {
         if (productState) {
           this.displayCode = productState.showProductCode;
