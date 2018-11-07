@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { TOGGLE_PRODUCT_CODE, ToggleProductCodeAction } from '../state/product.action';
+import { ToggleProductCodeAction } from '../state/product.action';
 import { ProductState } from '../state/product.state';
 
 @Component({
