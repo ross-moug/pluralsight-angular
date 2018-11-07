@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevToolsModule } from '@ngrx/store-devtools';
 
 // Imports for loading & configuring the in-memory web api
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -15,6 +16,8 @@ import { MenuComponent } from './home/menu.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './home/page-not-found.component';
 
+import { environment } from '../environments/environment';
+
 /* Feature Modules */
 import { UserModule } from './user/user.module';
 
@@ -26,6 +29,11 @@ import { UserModule } from './user/user.module';
     UserModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
+    StoreDevToolsModule.instrument({
+      name: 'Angular Redux',
+      maxAge: 25,
+      logOnly: environment.production
+    }),
   ],
   declarations: [
     AppComponent,
