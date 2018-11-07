@@ -1,4 +1,5 @@
-import { getShowProductCode } from './../state/product.selector';
+import { SetCurrentProductAction, InitialiseCurrentProductAction } from './../state/product.action';
+import { getShowProductCode, getCurrentProduct } from './../state/product.selector';
 import {
   Component,
   OnInit,
@@ -8,8 +9,6 @@ import {
   select,
   Store
 } from '@ngrx/store';
-
-import { Subscription } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -31,17 +30,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // Used to highlight the selected product in the list
   selectedProduct: Product | null;
-  sub: Subscription;
 
   constructor(private productService: ProductService,
               private store: Store<ProductState>) {
   }
 
   ngOnInit(): void {
-    this.sub = this.productService.selectedProductChanges$.subscribe(
-      selectedProduct => this.selectedProduct = selectedProduct
-    );
-
     this.productService.getProducts().subscribe(
       (products: Product[]) => this.products = products,
       (err: any) => this.errorMessage = err.error
@@ -50,10 +44,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.store.pipe(select(getShowProductCode)).subscribe(
       showProductCode => this.displayCode = showProductCode
     );
+
+    this.store.pipe(select(getCurrentProduct)).subscribe(
+      currentProduct => this.selectedProduct = currentProduct
+    );
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // TODO: handle subscriptions...
   }
 
   checkChanged(value: boolean): void {
@@ -61,11 +59,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   newProduct(): void {
-    this.productService.changeSelectedProduct(this.productService.newProduct());
+    this.store.dispatch(new InitialiseCurrentProductAction());
   }
 
   productSelected(product: Product): void {
-    this.productService.changeSelectedProduct(product);
+    this.store.dispatch(new SetCurrentProductAction(product));
   }
-
 }
