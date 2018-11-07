@@ -1,3 +1,4 @@
+import { initialState } from './user.state';
 import {
   TOGGLE_USER_NAME_MASK,
   ToggleUserNameMaskAction
@@ -5,7 +6,7 @@ import {
 import { UserState } from './user.state';
 
 
-export function usersReducer(state: UserState, action: ToggleUserNameMaskAction): UserState {
+export function usersReducer(state: UserState = initialState, action: ToggleUserNameMaskAction): UserState {
   switch (action.type) {
     case TOGGLE_USER_NAME_MASK:
       return {
