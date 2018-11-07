@@ -32,6 +32,18 @@ export function productsReducer(state: ProductState = initialState, action: Prod
           starRating: 0
         },
       };
+    case ProductActionType.Load:
+      // call service
+    case ProductActionType.LoadSuccess:
+      return {
+          ...state,
+          products: action.payload,
+        };
+    case ProductActionType.LoadFail:
+      return {
+          ...state,
+          errorMessage: action.payload,
+        };
     default:
       return state;
   }

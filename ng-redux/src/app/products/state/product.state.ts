@@ -8,11 +8,13 @@ export interface AppState extends AppState {
 export interface ProductState {
   showProductCode: boolean;
   currentProduct: Product;
-  prodcuts: Product[];
+  products: Product[];
+  errorMessage: string;
 }
 
 export const initialState: ProductState = {
   showProductCode: true,
   currentProduct: null,
-  prodcuts: []
+  products: [],
+  errorMessage: null,
 };

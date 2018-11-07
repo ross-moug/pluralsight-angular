@@ -16,5 +16,5 @@ export const getCurrentProduct = createSelector(
 
 export const getProducts = createSelector(
   getProductFeatureState,
-  state => state.prodcuts
+  state => state.products
 );
