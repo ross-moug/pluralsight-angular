@@ -4,7 +4,7 @@ import {
 } from './product.action';
 import { ProductState } from './product.state';
 
-export function reducer(state: ProductState, action: ToggleProductCodeAction): ProductState {
+export function productsReducer(state: ProductState, action: ToggleProductCodeAction): ProductState {
   switch (action.type) {
     case TOGGLE_PRODUCT_CODE:
       return {

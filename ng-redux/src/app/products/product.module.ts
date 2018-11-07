@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductShellComponent } from './product-shell/product-shell.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
-import { reducer } from './state/product.reducer';
+import { productsReducer } from './state/product.reducer';
 
 const productRoutes: Routes = [
   { path: '', component: ProductShellComponent }
@@ -17,7 +17,7 @@ const productRoutes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(productRoutes),
-    StoreModule.forFeature('products', reducer),
+    StoreModule.forFeature('products', productsReducer),
   ],
   declarations: [
     ProductShellComponent,

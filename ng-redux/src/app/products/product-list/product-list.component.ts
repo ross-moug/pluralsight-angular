@@ -42,6 +42,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
       (products: Product[]) => this.products = products,
       (err: any) => this.errorMessage = err.error
     );
+
+    this.store.select('products').subscribe(
+      productState => {
+        if (productState) {
+          this.displayCode = productState.showProductCode;
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
