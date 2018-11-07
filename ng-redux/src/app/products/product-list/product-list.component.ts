@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { TOGGLE_PRODUCT_CODE } from '../state/product.action';
+import { TOGGLE_PRODUCT_CODE, ToggleProductCodeAction } from '../state/product.action';
 import { ProductState } from '../state/product.state';
 
 @Component({
@@ -57,10 +57,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   checkChanged(value: boolean): void {
-    this.store.dispatch({
-      type: TOGGLE_PRODUCT_CODE,
-      payload: value
-    });
+    this.store.dispatch(new ToggleProductCodeAction(value));
   }
 
   newProduct(): void {

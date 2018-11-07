@@ -22,10 +22,12 @@ export class SetCurrentProductAction implements Action {
 
 export class ClearCurrentProductAction implements Action {
   readonly type: string = ProductActionType.ClearCurrentProduct;
+  payload: any;
 }
 
 export class InitialiseCurrentProductAction implements Action {
   readonly type: string = ProductActionType.InitialiseCurrentProduct;
+  payload: any;
 }
 
 export type ProductActions = ToggleProductCodeAction
