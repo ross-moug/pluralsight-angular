@@ -1,8 +1,24 @@
 import { Action } from '@ngrx/store';
 
-export const TOGGLE_USER_NAME_MASK: string = 'TOGGLE_USER_NAME_MASK';
+import { User } from '../user';
+
+export enum UserActionType {
+  ToggleUserNameMask = '[User] Toggle User Name Mask',
+  SetCurrentUser = '[User] Set Current User',
+}
 
 export class ToggleUserNameMaskAction implements Action {
-  type: string =  TOGGLE_USER_NAME_MASK;
-  payload: boolean;
+  readonly type: string = UserActionType.ToggleUserNameMask;
+
+  constructor(public payload: boolean) {}
 }
+
+export class SetCurrentUserAction implements Action {
+  readonly type: string = UserActionType.SetCurrentUser;
+
+  constructor(public payload: User) {}
+}
+
+export type UserActions = ToggleUserNameMaskAction
+  | SetCurrentUserAction
+;

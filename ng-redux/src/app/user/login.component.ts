@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from './auth.service';
-import { TOGGLE_USER_NAME_MASK } from './state/user.action';
+import { ToggleUserNameMaskAction } from './state/user.action';
 import { UserState } from './state/user.state';
 
 @Component({
@@ -34,10 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   checkChanged(value: boolean): void {
-    this.store.dispatch({
-      type: TOGGLE_USER_NAME_MASK,
-      payload: value
-    });
+    this.store.dispatch(new ToggleUserNameMaskAction(value));
   }
 
   login(loginForm: NgForm): void {

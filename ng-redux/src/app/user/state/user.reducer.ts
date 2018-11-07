@@ -1,17 +1,22 @@
 import { initialState } from './user.state';
 import {
-  TOGGLE_USER_NAME_MASK,
-  ToggleUserNameMaskAction
+  UserActionType,
+  UserActions
 } from './user.action';
 import { UserState } from './user.state';
 
 
-export function usersReducer(state: UserState = initialState, action: ToggleUserNameMaskAction): UserState {
+export function usersReducer(state: UserState = initialState, action: UserActions): UserState {
   switch (action.type) {
-    case TOGGLE_USER_NAME_MASK:
+    case UserActionType.ToggleUserNameMask:
       return {
         ...state,
         maskUserName: action.payload,
+      };
+    case UserActionType.SetCurrentUser:
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     default:
       return state;
