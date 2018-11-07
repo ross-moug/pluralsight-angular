@@ -2,9 +2,9 @@ import {
   TOGGLE_PRODUCT_CODE,
   ToggleProductCodeAction
 } from './product.action';
-import { ProductState } from './product.state';
+import { ProductState, initialState } from './product.state';
 
-export function productsReducer(state: ProductState, action: ToggleProductCodeAction): ProductState {
+export function productsReducer(state: ProductState = initialState, action: ToggleProductCodeAction): ProductState {
   switch (action.type) {
     case TOGGLE_PRODUCT_CODE:
       return {

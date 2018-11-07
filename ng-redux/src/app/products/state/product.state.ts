@@ -10,3 +10,9 @@ export interface ProductState {
   currentProduct: Product;
   prodcuts: Product[];
 }
+
+export const initialState: ProductState = {
+  showProductCode: true,
+  currentProduct: null,
+  prodcuts: []
+};
