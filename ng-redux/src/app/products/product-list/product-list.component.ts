@@ -1,5 +1,13 @@
-import { SetCurrentProductAction, InitialiseCurrentProductAction } from './../state/product.action';
-import { getShowProductCode, getCurrentProduct } from './../state/product.selector';
+import {
+  SetCurrentProductAction,
+  InitialiseCurrentProductAction,
+  LoadAction
+} from './../state/product.action';
+import {
+  getShowProductCode,
+  getCurrentProduct,
+  getProducts
+} from './../state/product.selector';
 import {
   Component,
   OnInit,
@@ -36,9 +44,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
-      (products: Product[]) => this.products = products,
-      (err: any) => this.errorMessage = err.error
+    this.store.dispatch(new LoadAction());
+
+    this.store.pipe(select(getProducts)).subscribe(
+      products => this.products = products
     );
 
     this.store.pipe(select(getShowProductCode)).subscribe(
