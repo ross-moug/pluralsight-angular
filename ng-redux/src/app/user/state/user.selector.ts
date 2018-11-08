@@ -9,7 +9,7 @@ export const getMaskUserName = createSelector(
   state => state.maskUserName
 );
 
-export const getCurrentUser = createSelector(
-  getUserFeatureState,
-  state => state.currentUser
-);
+// export const getCurrentUser = createSelector(
+//   getUserFeatureState,
+//   state => state.currentUser
+// );
