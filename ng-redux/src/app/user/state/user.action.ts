@@ -20,5 +20,5 @@ export class SetCurrentUserAction implements Action {
 }
 
 export type UserActions = ToggleUserNameMaskAction
-  | SetCurrentUserAction
+  // | SetCurrentUserAction
 ;

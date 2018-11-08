@@ -2,10 +2,10 @@ import { User } from '../user';
 
 export interface UserState {
   maskUserName: boolean;
-  currentUser: User;
+  // currentUser: User;
 }
 
 export const initialState: UserState = {
   maskUserName: false,
-  currentUser: null,
+  // currentUser: null,
 };
