@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 import {
   SetCurrentProductAction,
   InitialiseCurrentProductAction,
@@ -34,10 +36,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   displayCode: boolean;
 
-  products: Product[];
+  products$: Observable<Product[]>;
 
   // Used to highlight the selected product in the list
   selectedProduct: Product | null;
+  private isComponentActive = true;
 
   constructor(private productService: ProductService,
               private store: Store<ProductState>) {
@@ -46,21 +49,24 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new LoadAction());
 
-    this.store.pipe(select(getProducts)).subscribe(
-      products => this.products = products
-    );
+    this.products$ = this.store.pipe(select(getProducts));
 
-    this.store.pipe(select(getShowProductCode)).subscribe(
+    this.store.pipe(
+      select(getShowProductCode),
+      takeWhile(() => this.isComponentActive)).subscribe(
       showProductCode => this.displayCode = showProductCode
     );
 
-    this.store.pipe(select(getCurrentProduct)).subscribe(
-      currentProduct => this.selectedProduct = currentProduct
-    );
+    this.store.pipe(
+      select(getCurrentProduct),
+      takeWhile(() => this.isComponentActive))
+      .subscribe(
+        currentProduct => this.selectedProduct = currentProduct
+      );
   }
 
   ngOnDestroy(): void {
-    // TODO: handle subscriptions...
+    this.isComponentActive = false;
   }
 
   checkChanged(value: boolean): void {
