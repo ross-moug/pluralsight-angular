@@ -1,9 +1,24 @@
-import { ClearCurrentProductAction, SetCurrentProductAction } from './../state/product.action';
+import { takeWhile } from 'rxjs/operators';
+import {
+  ClearCurrentProductAction,
+  SetCurrentProductAction
+} from './../state/product.action';
 import { getCurrentProduct } from './../state/product.selector';
 import { ProductState } from './../state/product.state';
-import { Store, select } from '@ngrx/store';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Store,
+  select
+} from '@ngrx/store';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -26,6 +41,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
+  private isComponentActive = true;
 
   constructor(private fb: FormBuilder,
               private productService: ProductService,
@@ -56,17 +72,18 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     // Define the form group
     this.productForm = this.fb.group({
       productName: ['', [Validators.required,
-                         Validators.minLength(3),
-                         Validators.maxLength(50)]],
+        Validators.minLength(3),
+        Validators.maxLength(50)]],
       productCode: ['', Validators.required],
       starRating: ['', NumberValidators.range(1, 5)],
       description: ''
     });
 
     // Watch for changes to the currently selected product
-    this.store.pipe(select(getCurrentProduct)).subscribe(
-      currentProduct => this.displayProduct(currentProduct)
-    );
+    this.store.pipe(
+      select(getCurrentProduct),
+      takeWhile(() => this.isComponentActive))
+      .subscribe(currentProduct => this.displayProduct(currentProduct));
 
     // Watch for value changes
     this.productForm.valueChanges.subscribe(
@@ -75,7 +92,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // TODO: deal with subscriptions...
+    this.isComponentActive = false;
   }
 
   // Also validate on blur
