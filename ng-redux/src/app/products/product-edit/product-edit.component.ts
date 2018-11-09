@@ -2,6 +2,7 @@ import { takeWhile } from 'rxjs/operators';
 import {
   ClearCurrentProductAction,
   CreateAction,
+  DeleteAction,
   UpdateAction
 } from '../state/product.action';
 import { getCurrentProduct } from '../state/product.selector';
@@ -22,7 +23,6 @@ import {
 } from '@angular/forms';
 
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 
@@ -45,7 +45,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private isComponentActive = true;
 
   constructor(private fb: FormBuilder,
-              private productService: ProductService,
               private store: Store<ProductState>) {
 
     // Defines all of the validation messages for the form.
@@ -136,10 +135,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   deleteProduct(): void {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
-        this.productService.deleteProduct(this.product.id).subscribe(
-          () => this.store.dispatch(new ClearCurrentProductAction()),
-          (err: any) => this.errorMessage = err.error
-        );
+        this.store.dispatch(new DeleteAction(this.product.id));
       }
     } else {
       // No need to delete, it was never saved

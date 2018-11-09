@@ -19,13 +19,16 @@ import {
   CreateAction,
   CreateFailAction,
   CreateSuccessAction,
+  DeleteAction,
+  DeleteFailAction,
+  DeleteSuccessAction,
   LoadFailAction,
   LoadSuccessAction,
   ProductActionType,
   UpdateAction,
   UpdateFailAction,
   UpdateSuccessAction
-} from './product.action';
+} from "./product.action";
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +66,16 @@ export class ProductEffects {
     mergeMap(product => this.productService.createProduct(product).pipe(
       map(createdProduct => new CreateSuccessAction(createdProduct)),
       catchError(err => of(new CreateFailAction(err)))
+    ))
+  );
+
+  @Effect()
+  deleteProduct: Observable<Action> = this.actions.pipe(
+    ofType(ProductActionType.Delete),
+    map((action: DeleteAction) => action.payload),
+    mergeMap(productId => this.productService.deleteProduct(productId).pipe(
+      map(() => new DeleteSuccessAction(productId)),
+      catchError(err => of(new DeleteFailAction(err)))
     ))
   );
 }

@@ -51,9 +51,18 @@ export function productsReducer(state: ProductState = initialState, action: Prod
         products: createdProducts,
         errorMessage: '',
       };
+    case ProductActionType.DeleteSuccess:
+      const deletedProducts: Product[] = state.products.filter(p => p.id !== action.payload);
+      return {
+        ...state,
+        products: deletedProducts,
+        currentProductId: null,
+        errorMessage: '',
+      };
     case ProductActionType.LoadFail:
     case ProductActionType.UpdateFail:
     case ProductActionType.CreateFail:
+    case ProductActionType.DeleteFail:
       return {
         ...state,
         errorMessage: action.payload,

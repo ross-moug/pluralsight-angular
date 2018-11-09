@@ -22,7 +22,6 @@ import {
 } from '@ngrx/store';
 
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { ToggleProductCodeAction } from '../state/product.action';
 import { ProductState } from '../state/product.state';
 
@@ -43,8 +42,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   selectedProduct: Product | null;
   private isComponentActive = true;
 
-  constructor(private productService: ProductService,
-              private store: Store<ProductState>) {
+  constructor(private store: Store<ProductState>) {
   }
 
   ngOnInit(): void {
