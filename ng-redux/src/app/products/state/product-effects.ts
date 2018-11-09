@@ -16,6 +16,9 @@ import {
 } from 'rxjs/operators';
 import { ProductService } from '../product.service';
 import {
+  CreateAction,
+  CreateFailAction,
+  CreateSuccessAction,
   LoadFailAction,
   LoadSuccessAction,
   ProductActionType,
@@ -44,12 +47,22 @@ export class ProductEffects {
   );
 
   @Effect()
-  updateProducts: Observable<Action> = this.actions.pipe(
+  updateProduct: Observable<Action> = this.actions.pipe(
     ofType(ProductActionType.Update),
     map((action: UpdateAction) => action.payload),
     mergeMap(product => this.productService.updateProduct(product).pipe(
       map(updatedProduct => new UpdateSuccessAction(updatedProduct)),
       catchError(err => of(new UpdateFailAction(err)))
+    ))
+  );
+
+  @Effect()
+  createProduct: Observable<Action> = this.actions.pipe(
+    ofType(ProductActionType.Create),
+    map((action: CreateAction) => action.payload),
+    mergeMap(product => this.productService.createProduct(product).pipe(
+      map(createdProduct => new CreateSuccessAction(createdProduct)),
+      catchError(err => of(new CreateFailAction(err)))
     ))
   );
 }

@@ -44,8 +44,16 @@ export function productsReducer(state: ProductState = initialState, action: Prod
         products: updatedProducts,
         errorMessage: '',
       };
+    case ProductActionType.CreateSuccess:
+      const createdProducts: Product[] = state.products.concat(action.payload);
+      return {
+        ...state,
+        products: createdProducts,
+        errorMessage: '',
+      };
     case ProductActionType.LoadFail:
     case ProductActionType.UpdateFail:
+    case ProductActionType.CreateFail:
       return {
         ...state,
         errorMessage: action.payload,
