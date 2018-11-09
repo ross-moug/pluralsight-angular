@@ -1,4 +1,4 @@
-import { Product } from './../product';
+import { Product } from '../product';
 import { Action } from '@ngrx/store';
 
 export enum ProductActionType {
@@ -9,6 +9,9 @@ export enum ProductActionType {
   Load = '[Product] Load',
   LoadSuccess = '[Product] Load Success',
   LoadFail = '[Product] Load Fail',
+  Update = '[Product] Update',
+  UpdateSuccess = '[Product] Update Success',
+  UpdateFail = '[Product] Update Fail',
 }
 
 export class ToggleProductCodeAction implements Action {
@@ -50,6 +53,24 @@ export class LoadFailAction implements Action {
   constructor(public payload: string) {}
 }
 
+export class UpdateAction implements Action {
+  readonly type: string = ProductActionType.Update;
+
+  constructor(public payload: Product) {}
+}
+
+export class UpdateSuccessAction implements Action {
+  readonly type: string = ProductActionType.UpdateSuccess;
+
+  constructor(public payload: Product) {}
+}
+
+export class UpdateFailAction implements Action {
+  readonly type: string = ProductActionType.UpdateFail;
+
+  constructor(public payload: string) {}
+}
+
 export type ProductActions = ToggleProductCodeAction
   | SetCurrentProductAction
   | ClearCurrentProductAction
@@ -57,4 +78,7 @@ export type ProductActions = ToggleProductCodeAction
   | LoadAction
   | LoadSuccessAction
   | LoadFailAction
+  | UpdateAction
+  | UpdateSuccessAction
+  | UpdateFailAction
 ;

@@ -1,3 +1,4 @@
+import { Product } from '../product';
 import {
   ProductActions,
   ProductActionType
@@ -17,23 +18,17 @@ export function productsReducer(state: ProductState = initialState, action: Prod
     case ProductActionType.SetCurrentProduct:
       return {
         ...state,
-        currentProduct: action.payload,
+        currentProductId: action.payload.id,
       };
     case ProductActionType.ClearCurrentProduct:
       return {
         ...state,
-        currentProduct: null,
+        currentProductId: null,
       };
     case ProductActionType.InitialiseCurrentProduct:
       return {
         ...state,
-        currentProduct: {
-          id: 0,
-          productName: '',
-          productCode: 'New',
-          description: '',
-          starRating: 0
-        },
+        currentProductId: 0,
       };
     case ProductActionType.LoadSuccess:
       return {
@@ -41,7 +36,16 @@ export function productsReducer(state: ProductState = initialState, action: Prod
         products: action.payload,
         errorMessage: '',
       };
+    case ProductActionType.UpdateSuccess:
+      const updatedProducts: Product[] = state.products.map(
+        product => action.payload.id === product.id ? action.payload : product);
+      return {
+        ...state,
+        products: updatedProducts,
+        errorMessage: '',
+      };
     case ProductActionType.LoadFail:
+    case ProductActionType.UpdateFail:
       return {
         ...state,
         errorMessage: action.payload,

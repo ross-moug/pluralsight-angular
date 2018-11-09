@@ -1,10 +1,11 @@
 import { takeWhile } from 'rxjs/operators';
 import {
   ClearCurrentProductAction,
-  SetCurrentProductAction
-} from './../state/product.action';
-import { getCurrentProduct } from './../state/product.selector';
-import { ProductState } from './../state/product.state';
+  SetCurrentProductAction,
+  UpdateAction
+} from '../state/product.action';
+import { getCurrentProduct } from '../state/product.selector';
+import { ProductState } from '../state/product.state';
 import {
   Store,
   select
@@ -87,7 +88,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
     // Watch for value changes
     this.productForm.valueChanges.subscribe(
-      value => this.displayMessage = this.genericValidator.processMessages(this.productForm)
+      () => this.displayMessage = this.genericValidator.processMessages(this.productForm)
     );
   }
 
@@ -160,10 +161,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             (err: any) => this.errorMessage = err.error
           );
         } else {
-          this.productService.updateProduct(p).subscribe(
-            product => this.store.dispatch(new SetCurrentProductAction(product)),
-            (err: any) => this.errorMessage = err.error
-          );
+          this.store.dispatch(new UpdateAction(p));
         }
       }
     } else {
