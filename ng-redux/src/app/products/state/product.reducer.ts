@@ -2,7 +2,10 @@ import {
   ProductActions,
   ProductActionType
 } from './product.action';
-import { ProductState, initialState } from './product.state';
+import {
+  ProductState,
+  initialState
+} from './product.state';
 
 export function productsReducer(state: ProductState = initialState, action: ProductActions): ProductState {
   switch (action.type) {
@@ -32,18 +35,17 @@ export function productsReducer(state: ProductState = initialState, action: Prod
           starRating: 0
         },
       };
-    case ProductActionType.Load:
-      // call service
     case ProductActionType.LoadSuccess:
       return {
-          ...state,
-          products: action.payload,
-        };
+        ...state,
+        products: action.payload,
+        errorMessage: '',
+      };
     case ProductActionType.LoadFail:
       return {
-          ...state,
-          errorMessage: action.payload,
-        };
+        ...state,
+        errorMessage: action.payload,
+      };
     default:
       return state;
   }

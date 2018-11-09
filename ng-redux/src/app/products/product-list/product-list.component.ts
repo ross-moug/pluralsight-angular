@@ -8,7 +8,8 @@ import {
 import {
   getShowProductCode,
   getCurrentProduct,
-  getProducts
+  getProducts,
+  getErrorMessage
 } from './../state/product.selector';
 import {
   Component,
@@ -60,9 +61,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.store.pipe(
       select(getCurrentProduct),
       takeWhile(() => this.isComponentActive))
-      .subscribe(
-        currentProduct => this.selectedProduct = currentProduct
-      );
+      .subscribe(currentProduct => this.selectedProduct = currentProduct);
+
+    this.store.pipe(
+      select(getErrorMessage),
+      takeWhile(() => this.isComponentActive))
+      .subscribe(errorMessage => this.errorMessage = errorMessage);
   }
 
   ngOnDestroy(): void {
