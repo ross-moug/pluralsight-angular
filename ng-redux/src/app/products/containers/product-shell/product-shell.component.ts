@@ -1,5 +1,5 @@
 import { getErrorMessage } from './../../state/product.selector';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import {
   select,
   Store
@@ -18,12 +18,12 @@ import {
 } from '../../state/product.selector';
 
 import { Product } from '../../product';
-import { ProductService } from '../../product.service';
 import { ToggleProductCodeAction } from '../../state/product.action';
 import { ProductState } from '../../state/product.state';
 
 @Component({
-    templateUrl: './product-shell.component.html'
+    templateUrl: './product-shell.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductShellComponent implements OnInit {
   errorMessage$: Observable<string>;
