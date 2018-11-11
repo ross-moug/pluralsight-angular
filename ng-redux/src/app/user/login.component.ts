@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from './auth.service';
-import { ToggleUserNameMaskAction } from './state/user.action';
-import { UserState } from './state/user.state';
+import {
+  ToggleUserNameMaskAction,
+  UserState
+} from './state';
 
 @Component({
   templateUrl: './login.component.html',
