@@ -1,25 +1,22 @@
-import { getErrorMessage } from './../../state/product.selector';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import {
   select,
   Store
 } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
-import {
-  SetCurrentProductAction,
-  InitialiseCurrentProductAction,
-  LoadAction
-} from '../../state/product.action';
 import {
   getShowProductCode,
   getCurrentProduct,
-  getProducts
-} from '../../state/product.selector';
+  getProducts,
+  getErrorMessage,
+  SetCurrentProductAction,
+  InitialiseCurrentProductAction,
+  LoadAction,
+  ToggleProductCodeAction,
+  ProductState
+} from '../../state';
 
 import { Product } from '../../product';
-import { ToggleProductCodeAction } from '../../state/product.action';
-import { ProductState } from '../../state/product.state';
 
 @Component({
     templateUrl: './product-shell.component.html',

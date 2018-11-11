@@ -1,6 +1,4 @@
-import { ClearCurrentProductAction, SetCurrentProductAction } from './../state/product.action';
-import { getCurrentProduct } from './../state/product.selector';
-import { ProductState } from './../state/product.state';
+import {  } from './../state/product.state';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +7,13 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
+
+import {
+  getCurrentProduct,
+  ClearCurrentProductAction,
+  SetCurrentProductAction,
+  ProductState
+} from './../state';
 
 @Component({
   selector: 'pm-product-edit',
