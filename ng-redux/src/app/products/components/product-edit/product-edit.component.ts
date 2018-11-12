@@ -31,7 +31,6 @@ export class ProductEditComponent implements OnInit, OnChanges {
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
-  private isComponentActive = true;
 
   constructor(private fb: FormBuilder) {
     // Defines all of the validation messages for the form.
@@ -73,8 +72,8 @@ export class ProductEditComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.selectedProduct) {
-      const product: Product = changes.selectedProduct.currentValue as Product;
+    if (changes.product) {
+      const product: Product = changes.product.currentValue as Product;
       this.displayProduct(product);
     }
   }

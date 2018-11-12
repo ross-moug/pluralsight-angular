@@ -1,4 +1,4 @@
-import { ClearCurrentProductAction, DeleteProductAction, CreateProductAction, UpdateProductAction } from './../../state/product.action';
+import { ClearCurrentProductAction, DeleteAction, CreateAction, UpdateAction } from './../../state/product.action';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
   select,
@@ -57,15 +57,15 @@ export class ProductShellComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.store.dispatch(new DeleteProductAction(id));
+    this.store.dispatch(new DeleteAction(id));
   }
 
   createProduct(product: Product): void {
-    this.store.dispatch(new CreateProductAction(product));
+    this.store.dispatch(new CreateAction(product));
   }
 
   updateProduct(product: Product): void {
-    this.store.dispatch(new UpdateProductAction(product));
+    this.store.dispatch(new UpdateAction(product));
   }
 
   clearSelectedProduct(): void {
