@@ -31,6 +31,7 @@ export class ProductEditComponent implements OnInit, OnChanges {
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
+  private isComponentActive = true;
 
   constructor(private fb: FormBuilder) {
     // Defines all of the validation messages for the form.
@@ -58,8 +59,8 @@ export class ProductEditComponent implements OnInit, OnChanges {
     // Define the form group
     this.productForm = this.fb.group({
       productName: ['', [Validators.required,
-                         Validators.minLength(3),
-                         Validators.maxLength(50)]],
+        Validators.minLength(3),
+        Validators.maxLength(50)]],
       productCode: ['', Validators.required],
       starRating: ['', NumberValidators.range(1, 5)],
       description: ''
