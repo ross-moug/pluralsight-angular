@@ -28,7 +28,7 @@ import {
   UpdateAction,
   UpdateFailAction,
   UpdateSuccessAction
-} from "./product.action";
+} from './product.action';
 
 @Injectable({
   providedIn: 'root'
