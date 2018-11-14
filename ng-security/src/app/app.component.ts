@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccountService } from './core/account.service';
 import { AuthService } from './core/auth.service';
 import { UserProfile } from './model/user-profile';
 import { MatDialog } from '@angular/material';
-import { Utils } from './core/utils';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,27 @@ export class AppComponent implements OnInit {
   constructor(
     private _acctService: AccountService,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    if (window.location.href.indexOf('?postLogout=true')) {
+      this.authService.signoutRedirectCallback().then(() => {
+        const url: string = this.router.url.substring(0, this.router.url.indexOf('?'));
+        this.router.navigateByUrl(url);
+      });
+    }
   }
-
   login(): void {
     this.authService.login();
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }
