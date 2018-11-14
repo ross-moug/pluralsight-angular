@@ -1,3 +1,4 @@
+import { Constants } from './../constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -6,7 +7,6 @@ import {
   UserManagerSettings,
   WebStorageStateStore
 } from 'oidc-client';
-import { Constants } from '../constants';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +18,12 @@ export class AuthService {
     response_type: 'id_token token',
     post_logout_redirect_uri: `${Constants.clientRoot}?postLogout=true`,
     userStore: new WebStorageStateStore({ store: window.localStorage }),
+    metadata: {
+      authorization_endpoint: `${Constants.stsAuthority}authorize?audience=projects-api`,
+      issuer: `${Constants.stsAuthority}`,
+      jwks_uri: `${Constants.stsAuthority}.well-known/jwks.json`,
+      end_session_endpoint: `${Constants.stsAuthority}v2/logout?returnTo=${Constants.clientRoot}?postLogout=true`,
+    }
   };
 
   private userManager: UserManager;
