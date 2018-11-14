@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   UserManager,
-  UserManagerSettings
+  UserManagerSettings,
+  WebStorageStateStore
 } from 'oidc-client';
 import { Constants } from '../constants';
 
@@ -17,6 +18,7 @@ export class AuthService {
     scope: 'openid projects-api profile',
     response_type: 'id_token token',
     post_logout_redirect_uri: `${Constants.clientRoot}`,
+    userStore: new WebStorageStateStore({ store: window.localStorage }),
   };
 
   private userManager: UserManager;
