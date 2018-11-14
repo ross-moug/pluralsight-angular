@@ -11,8 +11,8 @@ import { Constants } from '../constants';
 })
 export class AuthService {
   private readonly config: UserManagerSettings = {
-    authority: Constants.apiRoot,
-    client_id: 'spa-client',
+    authority: Constants.stsAuthority,
+    client_id: Constants.clientId,
     redirect_uri: `${Constants.clientRoot}assets/oidc-login-redirect.html`,
     scope: 'openid projects-api profile',
     response_type: 'id_token token',
@@ -23,5 +23,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.userManager = new UserManager(this.config);
+  }
+
+  login(): Promise<any> {
+    return this.userManager.signinRedirect();
   }
 }
