@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   User,
@@ -23,14 +22,14 @@ export class AuthService {
   private userManager: UserManager;
   private user: User;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.userManager = new UserManager(this.config);
 
     this.userManager.getUser().then(user => {
       if (user && !user.expired) {
         this.user = user;
       }
-    })
+    });
   }
 
   isLoggedIn(): boolean {
