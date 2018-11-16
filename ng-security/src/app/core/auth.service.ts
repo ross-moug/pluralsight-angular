@@ -17,6 +17,8 @@ export class AuthService {
     response_type: 'id_token token',
     post_logout_redirect_uri: `${Constants.clientRoot}?postLogout=true`,
     userStore: new WebStorageStateStore({ store: window.localStorage }),
+    automaticSilentRenew: true,
+    silent_redirect_uri: `${Constants.clientRoot}assets/silent-redirect.html`,
   };
 
   private userManager: UserManager;
@@ -29,6 +31,12 @@ export class AuthService {
       if (user && !user.expired) {
         this.user = user;
       }
+    });
+
+    this.userManager.events.addUserLoaded(() => {
+      this.userManager.getUser().then(user => {
+        this.user = user;
+      });
     });
   }
 
