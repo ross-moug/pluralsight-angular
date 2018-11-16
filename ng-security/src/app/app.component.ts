@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
     public dialog: MatDialog,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     if (window.location.href.indexOf('?postLogout=true')) {
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
   login(): void {
     this.authService.login();
   }
@@ -40,5 +42,12 @@ export class AppComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+
+  isAdmin(): boolean {
+    return this.authService.authContext
+      && this.authService.authContext.claims
+      && !!this.authService.authContext.claims.find(
+        claim => claim.type === 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' && claim.value === 'Admin');
   }
 }

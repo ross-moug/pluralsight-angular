@@ -12,6 +12,8 @@ import { Utils } from './utils';
 
 @Injectable()
 export class AuthService {
+  authContext: AuthContext;
+
   private readonly config: UserManagerSettings = {
     authority: Constants.stsAuthority,
     client_id: Constants.clientId,
@@ -26,7 +28,6 @@ export class AuthService {
 
   private userManager: UserManager;
   private user: User;
-  private authContext: AuthContext;
 
   constructor(private http: HttpClient) {
     this.userManager = new UserManager(this.config);
