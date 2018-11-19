@@ -3,8 +3,7 @@ import { map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  allBooks,
-  allReaders
+  allBooks
 } from '../data';
 import { Book} from '../models/book';
 import { OldBook } from '../models/oldBook';
@@ -24,12 +23,37 @@ export class DataService {
     this.mostPopularBook = popularBook;
   }
 
-  getAllReaders(): Reader[] {
-    return allReaders;
+  getAllReaders(): Observable<Reader[]> {
+    return this.http.get<Reader[]>("/api/readers");
   }
 
-  getReaderById(id: number): Reader {
-    return allReaders.find(reader => reader.readerID === id);
+  getReaderById(id: number): Observable<Reader> {
+    return this.http.get<Reader>(`/api/readers/${id}`, {
+      headers : new HttpHeaders({
+        "Accept": "application/json",
+        "Authorization": "my-token"
+      })
+    });
+  }
+
+  addReader(reader: Reader): Observable<Reader> {
+    return this.http.post<Reader>("/api/readers", reader, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    });
+  }
+
+  updateReader(reader: Reader): Observable<void> {
+    return this.http.put<void>(`/api/books/${reader.readerID}`, reader, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    });
+  }
+
+  deleteReader(readerId: number): Observable<void> {
+    return this.http.delete<void>(`/api/readers/${readerId}`);
   }
 
   getAllBooks(): Observable<Book[]> {

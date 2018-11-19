@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
+import { DataService } from './../core/data.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Reader } from '../models/reader';
 
 @Component({
@@ -6,17 +8,27 @@ import { Reader } from '../models/reader';
   templateUrl: './add-reader.component.html',
   styles: []
 })
-export class AddReaderComponent implements OnInit {
+export class AddReaderComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  // tslint:disable-next-line:no-inferrable-types
+  private isComponentActive: boolean = true;
 
-  ngOnInit() { }
+  constructor(private dataService: DataService) { }
+
+  ngOnInit(): void { }
+
+  ngOnDestroy(): void {
+    this.isComponentActive = false;
+  }
 
   saveReader(formValues: any): void {
     const newReader: Reader = <Reader>formValues;
     newReader.readerID = 0;
-    console.log(newReader);
-    console.warn('Save new reader not yet implemented.');
+    this.dataService.addReader(newReader)
+      .pipe(takeWhile(() => this.isComponentActive))
+      .subscribe(
+        data => console.log(`Successfully created reader with ID ${data.readerID}`),
+        error => console.error(error)
+      );
   }
-
 }
