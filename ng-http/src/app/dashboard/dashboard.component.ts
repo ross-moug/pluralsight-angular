@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         data => this.allBooks = data,
         error => console.error(error),
         () => console.log("Finished retrieving books"));
+
     this.allReaders = this.dataService.getAllReaders();
     this.mostPopularBook = this.dataService.mostPopularBook;
 
@@ -45,7 +46,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   deleteBook(bookID: number): void {
-    console.warn(`Delete book not yet implemented (bookID: ${bookID}).`);
+    this.dataService.deleteBook(bookID)
+    .pipe(takeWhile(() => this.isComponentActive))
+    .subscribe(
+      () => {
+        const index: number = this.allBooks.findIndex(book => book.bookID === bookID);
+        this.allBooks.splice(index, 1);
+      },
+      error => console.error(error)
+    );
   }
 
   deleteReader(readerID: number): void {

@@ -45,6 +45,10 @@ export class EditBookComponent implements OnInit, OnDestroy {
   }
 
   saveChanges(): void {
-    console.warn('Save changes to book not yet implemented.');
+    this.dataService.updateBook(this.selectedBook)
+    .pipe(takeWhile(() => this.isComponentActive))
+    .subscribe(
+      data => console.log(`${this.selectedBook.title} updated successfully`),
+      error => console.error(error));
   }
 }
