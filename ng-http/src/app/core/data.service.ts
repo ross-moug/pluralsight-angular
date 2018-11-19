@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   allBooks,
@@ -10,7 +11,9 @@ import { LoggerService } from './logger.service';
 @Injectable()
 export class DataService {
 
-  constructor(private loggerService: LoggerService) { }
+  constructor(
+    private loggerService: LoggerService,
+    private http: HttpClient) { }
 
   mostPopularBook: Book = allBooks[0];
 
