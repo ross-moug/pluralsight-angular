@@ -28,6 +28,12 @@ export class EditBookComponent implements OnInit, OnDestroy {
         error => console.error(error),
         () => console.log(`Finished retrieving book with ID ${bookId}`)
       );
+
+    this.dataService.getOldBookById(bookId)
+      .pipe(takeWhile(() => this.isComponentActive))
+      .subscribe(
+        data => console.log(data.bookTitle)
+      );
   }
 
   ngOnDestroy(): void {

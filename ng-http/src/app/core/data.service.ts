@@ -1,11 +1,13 @@
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   allBooks,
   allReaders
 } from '../data';
-import { Book } from '../models/book';
+import { Book} from '../models/book';
+import { OldBook } from '../models/oldBook';
 import { Reader } from '../models/reader';
 import { LoggerService } from './logger.service';
 
@@ -41,5 +43,20 @@ export class DataService {
         "Authorization": "my-token"
       })
     });
+  }
+
+  getOldBookById(id: number): Observable<OldBook> {
+    return this.http.get<Book>(`/api/books/${id}`, {
+      headers : new HttpHeaders({
+        "Accept": "application/json",
+        "Authorization": "my-token"
+      })
+    })
+    .pipe(
+      map(book => <OldBook> {
+        bookTitle: book.title,
+        year: book.publicationYear
+      }),
+      tap(classicBook => console.log(classicBook)));
   }
 }
