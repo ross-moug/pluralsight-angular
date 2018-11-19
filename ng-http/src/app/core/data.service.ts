@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   allBooks,
@@ -33,7 +34,12 @@ export class DataService {
     return this.http.get<Book[]>("/api/books");
   }
 
-  getBookById(id: number): Book {
-    return allBooks.find(book => book.bookID === id);
+  getBookById(id: number): Observable<Book> {
+    return this.http.get<Book>(`/api/books/${id}`, {
+      headers : new HttpHeaders({
+        "Accept": "application/json",
+        "Authorization": "my-token"
+      })
+    });
   }
 }
