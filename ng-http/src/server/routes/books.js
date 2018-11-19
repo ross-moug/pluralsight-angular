@@ -1,6 +1,6 @@
 var express = require('express');
 var fs = require('fs');
-var datafile = 'server/data/books.json';
+var datafile = 'src/server/data/books.json';
 var router = express.Router();
 
 /* GET all books and POST new books */

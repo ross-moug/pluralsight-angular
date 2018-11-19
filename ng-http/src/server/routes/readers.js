@@ -1,6 +1,6 @@
 var express = require('express');
 var fs = require('fs');
-var datafile = 'server/data/readers.json';
+var datafile = 'src/server/data/readers.json';
 var router = express.Router();
 
 /* GET all books and POST new readers */

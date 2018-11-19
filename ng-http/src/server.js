@@ -16,19 +16,19 @@ var app = express();
 app.set('views', path.join(__dirname, '/server/views'));
 app.set('view engine', 'jade');
 
-app.use(favicon(path.join('dist/ng-http/favicon.ico')));
+app.use(favicon(path.resolve('.', 'dist/ng-http/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join('dist/ng-http/')));
+app.use(express.static(path.resolve('.', 'dist/ng-http/')));
 
 // app.use('/', routes);
 app.use('/api/readers', readers);
 app.use('/api/books', books);
 app.use('/api/errors', errors);
 app.get('*', function(req, res) {
-  res.sendFile(path.join('dist/ng-http/index.html'));
+  res.sendFile(path.resolve('.', 'dist/ng-http/index.html'));
 });
 
 // catch 404 and forward to error handler
