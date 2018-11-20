@@ -1,3 +1,4 @@
+import { AddHeaderInterceptorService } from './add-header-interceptor.service';
 import {
   NgModule,
   Optional,
@@ -9,10 +10,9 @@ import { BooksResolverService } from './books-resolver.service';
 
 import { LoggerService } from './logger.service';
 import { DataService } from './data.service';
-import { PlainLoggerService } from './plain-logger.service';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { BookTrackerErrorHandlerService } from './book-tracker-error-handler.service';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -24,6 +24,7 @@ import { BookTrackerErrorHandlerService } from './book-tracker-error-handler.ser
     DataService,
     { provide: ErrorHandler, useClass: BookTrackerErrorHandlerService },
     BooksResolverService,
+    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptorService, multi: true }
   ]
 })
 export class CoreModule {
