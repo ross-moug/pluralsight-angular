@@ -5,6 +5,7 @@ import {
   ErrorHandler
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BooksResolverService } from './books-resolver.service';
 
 import { LoggerService } from './logger.service';
 import { DataService } from './data.service';
@@ -21,7 +22,8 @@ import { BookTrackerErrorHandlerService } from './book-tracker-error-handler.ser
   providers: [
     LoggerService,
     DataService,
-    { provide: ErrorHandler, useClass: BookTrackerErrorHandlerService }
+    { provide: ErrorHandler, useClass: BookTrackerErrorHandlerService },
+    BooksResolverService,
   ]
 })
 export class CoreModule {

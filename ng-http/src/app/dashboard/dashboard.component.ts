@@ -4,6 +4,7 @@ import {
   OnDestroy,
   VERSION
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { DataService } from '../core/data.service';
@@ -25,16 +26,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private isComponentActive = true;
 
   constructor(private dataService: DataService,
-              private title: Title) {
+              private title: Title,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.dataService.getAllBooks()
-      .pipe(takeWhile(() => this.isComponentActive))
-      .subscribe(
-        (data: Book[]) => this.allBooks = data,
-        (error: BookTrackerError) => console.error(error.friendlyMessage),
-        () => console.log('Finished retrieving books'));
+    const resolvedData: Book[] | BookTrackerError = this.route.snapshot.data['resolvedBooks'];
+
+    if (resolvedData instanceof BookTrackerError) {
+      console.error(resolvedData.friendlyMessage);
+    } else {
+      this.allBooks = resolvedData;
+    }
 
     this.dataService.getAllReaders()
       .pipe(takeWhile(() => this.isComponentActive))
