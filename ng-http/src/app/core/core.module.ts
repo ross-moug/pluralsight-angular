@@ -1,3 +1,4 @@
+import { LogResponseInterceptorService } from './log-response-interceptor.service';
 import { AddHeaderInterceptorService } from './add-header-interceptor.service';
 import {
   NgModule,
@@ -24,7 +25,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     DataService,
     { provide: ErrorHandler, useClass: BookTrackerErrorHandlerService },
     BooksResolverService,
-    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LogResponseInterceptorService, multi: true }
   ]
 })
 export class CoreModule {
