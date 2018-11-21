@@ -1,4 +1,5 @@
-import { CacheService } from "./cache.service";
+import { CacheInterceptorService } from './cache-interceptor.servicet';
+import { CacheService } from './cache.service';
 import { LogResponseInterceptorService } from './log-response-interceptor.service';
 import { AddHeaderInterceptorService } from './add-header-interceptor.service';
 import {
@@ -28,6 +29,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BooksResolverService,
     { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LogResponseInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptorService, multi: true },
     CacheService,
   ]
 })
