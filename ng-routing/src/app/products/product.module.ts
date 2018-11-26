@@ -24,7 +24,7 @@ import { SharedModule } from '../shared/shared.module';
         path: 'products/:id/edit',
         component: ProductEditComponent,
         resolve: { product: ProductResolverService },
-        canDeactivate: [ProductGuardService],
+        canDeactivate: [ProductGuardService], 
         children: [
           { path: '', redirectTo: 'info', pathMatch: 'full' },
           { path: 'info', component: ProductEditInfoComponent },
