@@ -14,6 +14,10 @@ export class DataService {
 
   mostPopularBook: Book = allBooks[0];
 
+  constructor(
+    private loggerService: LoggerService,
+    private http: HttpClient) {}
+
   getAuthorRecommendation(readerID: number): Promise<string> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -25,9 +29,6 @@ export class DataService {
       }, 2000);
     });
   }
-
-  constructor(private loggerService: LoggerService,
-              private http: HttpClient) { }
 
   getAllReaders(): Observable<Reader[] | BookTrackerError> {
     return this.http.get<Reader[]>('/api/readers')
