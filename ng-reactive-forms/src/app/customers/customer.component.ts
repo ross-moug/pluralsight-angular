@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormGroup,
   FormControl,
   FormBuilder,
@@ -7,6 +8,17 @@ import {
 } from '@angular/forms';
 
 import { Customer } from './customer';
+
+function range(control: AbstractControl): { [key: string]: boolean } | null {
+  if (control.value !== null
+    && (isNaN(control.value)
+      || control.value < 1
+      || control.value > 5)) {
+    return { 'range': true };
+  }
+
+  return null;
+}
 
 @Component({
   selector: 'app-customer',
@@ -28,6 +40,7 @@ export class CustomerComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: '',
       notification: 'email',
+      rating: [null, range],
       sendCatalog: true,
     });
   }
