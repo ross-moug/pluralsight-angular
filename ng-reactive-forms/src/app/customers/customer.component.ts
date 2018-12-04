@@ -20,7 +20,21 @@ function range(min: number, max: number): ValidatorFn {
     }
 
     return null;
+  };
+}
+
+function emailMatcher(control: AbstractControl): { [key: string]: boolean } | null {
+  const emailControl: FormControl = <FormControl> control.get('email');
+  const confirmEmailControl: FormControl = <FormControl> control.get('confirmEmail');
+
+  if (emailControl.pristine
+    || confirmEmailControl.pristine
+    || emailControl.value === confirmEmailControl.value) {
+    return null;
   }
+
+  console.log('match failed!');
+  return { 'match': true };
 }
 
 @Component({
@@ -40,7 +54,10 @@ export class CustomerComponent implements OnInit {
     this.customerForm = this.builder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.email]],
+      emailGroup: this.builder.group({
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', Validators.required],
+      }, { validator: emailMatcher}),
       phone: '',
       notification: 'email',
       rating: [null, range(1, 5)],
