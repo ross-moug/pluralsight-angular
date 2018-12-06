@@ -5,8 +5,9 @@ import {
   FormControl,
   FormBuilder,
   Validators,
-  ValidatorFn
-} from '@angular/forms';
+  ValidatorFn,
+  Form
+} from "@angular/forms";
 
 import { Customer } from './customer';
 
@@ -46,6 +47,13 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer = new Customer();
 
+  emailMessage: string;
+
+  private validationMessages: { [key: string]: string } = {
+    required: 'Please confirm your email address.',
+    email: 'The confirmation does not match the email address.'
+  };
+
   constructor(
     private builder: FormBuilder
   ) {}
@@ -66,6 +74,11 @@ export class CustomerComponent implements OnInit {
 
     this.customerForm.get('notification').valueChanges.subscribe(
       value => this.setNotification(value)
+    );
+
+    const emailControl: FormControl = <FormControl> this.customerForm.get('emailGroup.email');
+    emailControl.valueChanges.subscribe(
+      value => this.setMessage(emailControl)
     );
   }
 
@@ -90,5 +103,15 @@ export class CustomerComponent implements OnInit {
       phoneControl.clearValidators();
     }
     phoneControl.updateValueAndValidity();
+  }
+
+  private setMessage(control: AbstractControl): void {
+    this.emailMessage = '';
+
+    if ((control.touched || control.dirty)
+      && control.errors) {
+      this.emailMessage = Object.keys(control.errors)
+        .map(key => this.emailMessage += this.validationMessages[key]).join(' ');
+    }
   }
 }
