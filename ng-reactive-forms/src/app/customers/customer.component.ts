@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
   FormControl,
   FormBuilder,
   Validators,
-  ValidatorFn,
-  Form
-} from "@angular/forms";
+  ValidatorFn
+} from '@angular/forms';
 
 import { Customer } from './customer';
 
 function range(min: number, max: number): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: boolean } | null =>  {
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
     if (control.value !== null
       && (isNaN(control.value)
         || control.value < min
@@ -25,8 +27,8 @@ function range(min: number, max: number): ValidatorFn {
 }
 
 function emailMatcher(control: AbstractControl): { [key: string]: boolean } | null {
-  const emailControl: FormControl = <FormControl> control.get('email');
-  const confirmEmailControl: FormControl = <FormControl> control.get('confirmEmail');
+  const emailControl: FormControl = <FormControl>control.get('email');
+  const confirmEmailControl: FormControl = <FormControl>control.get('confirmEmail');
 
   if (emailControl.pristine
     || confirmEmailControl.pristine
@@ -47,16 +49,37 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer = new Customer();
 
-  emailMessage: string;
+  messages: { [key: string]: string } = {};
 
-  private validationMessages: { [key: string]: string } = {
-    required: 'Please confirm your email address.',
-    email: 'The confirmation does not match the email address.'
+  private validationMessages: { [key: string]: { [messageKey: string]: string } } = {
+    'emailGroup.email': {
+      required: 'Please enter your email address.',
+      email: 'Please enter a valid email address.',
+    },
+    'emailGroup.confirmEmail': {
+      required: 'Please confirm your email address.',
+      match: 'The confirmation does not match the email address.',
+    },
+    lastName: {
+      required: 'Please enter your last name',
+      maxlength: 'The last name must be less than 50 characters.',
+    },
+    firstName: {
+      required: 'Please enter your first name',
+      minlength: 'The first name must be longer than 3 characters.',
+    },
+    phone: {
+      required: 'Please enter your phone number.',
+    },
+    rating: {
+      range: 'Please rate your experience from 1 to 5.',
+    },
   };
 
   constructor(
     private builder: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.customerForm = this.builder.group({
@@ -65,7 +88,7 @@ export class CustomerComponent implements OnInit {
       emailGroup: this.builder.group({
         email: ['', [Validators.required, Validators.email]],
         confirmEmail: ['', Validators.required],
-      }, { validator: emailMatcher}),
+      }, { validator: emailMatcher }),
       phone: '',
       notification: 'email',
       rating: [null, range(1, 5)],
@@ -76,10 +99,12 @@ export class CustomerComponent implements OnInit {
       value => this.setNotification(value)
     );
 
-    const emailControl: FormControl = <FormControl> this.customerForm.get('emailGroup.email');
-    emailControl.valueChanges.subscribe(
-      value => this.setMessage(emailControl)
-    );
+    Object.keys(this.validationMessages).forEach(key => {
+      const emailControl: FormControl = <FormControl>this.customerForm.get(key);
+      emailControl.valueChanges.subscribe(
+        () => this.setMessage(emailControl, key)
+      );
+    });
   }
 
   save() {
@@ -96,7 +121,7 @@ export class CustomerComponent implements OnInit {
   }
 
   setNotification(medium: string): void {
-    const phoneControl: FormControl = <FormControl> this.customerForm.get('phone');
+    const phoneControl: FormControl = <FormControl>this.customerForm.get('phone');
     if (medium === 'text') {
       phoneControl.setValidators(Validators.required);
     } else {
@@ -105,13 +130,13 @@ export class CustomerComponent implements OnInit {
     phoneControl.updateValueAndValidity();
   }
 
-  private setMessage(control: AbstractControl): void {
-    this.emailMessage = '';
+  private setMessage(control: AbstractControl, controlKey: string): void {
+    this.messages[controlKey] = '';
 
     if ((control.touched || control.dirty)
       && control.errors) {
-      this.emailMessage = Object.keys(control.errors)
-        .map(key => this.emailMessage += this.validationMessages[key]).join(' ');
+      this.messages[controlKey] = Object.keys(control.errors)
+        .map(key => this.messages[controlKey] += this.validationMessages[controlKey][key]).join(' ');
     }
   }
 }

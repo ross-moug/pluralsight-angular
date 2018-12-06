@@ -17,14 +17,9 @@
                  type="text"
                  placeholder="First Name (required)"
                  formControlName="firstName"
-                 [ngClass]="{'is-invalid': (customerForm.get('firstName').touched || customerForm.get('firstName').dirty) && !customerForm.get('firstName').valid }" />
+                 [ngClass]="{'is-invalid': messages['firstName'] }" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('firstName').errors?.required">
-              Please enter your first name.
-            </span>
-            <span *ngIf="customerForm.get('firstName').errors?.minlength">
-              The first name must be longer than 3 characters.
-            </span>
+              {{ messages['firstName'] }}
           </span>
         </div>
       </div>
@@ -38,14 +33,9 @@
                  type="text"
                  placeholder="Last Name (required)"
                  formControlName="lastName"
-                 [ngClass]="{'is-invalid': (customerForm.get('lastName').touched || customerForm.get('lastName').dirty) && !customerForm.get('lastName').valid }" />
+                 [ngClass]="{'is-invalid': messages['lastName'] }" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('lastName').errors?.required">
-              Please enter your last name.
-            </span>
-            <span *ngIf="customerForm.get('lastName').errors?.maxlength">
-              The last name must be less than 50 characters.
-            </span>
+              {{ messages['lastName'] }}
           </span>
         </div>
       </div>
@@ -60,30 +50,25 @@
                   type="email"
                   placeholder="Email (required)"
                   formControlName="email"
-                  [ngClass]="{'is-invalid': (customerForm.get('emailGroup.email').touched || customerForm.get('emailGroup.email').dirty) && !customerForm.get('emailGroup.email').valid }" />
+                  [ngClass]="{'is-invalid': messages['emailGroup.email'] }" />
             <span class="invalid-feedback">
-              <span *ngIf="customerForm.get('emailGroup.email').errors?.required">
-                Please enter your email address.
-              </span>
-              <span *ngIf="customerForm.get('emailGroup.email').errors?.email">
-                Please enter a valid email address.
-              </span>
+              {{ messages['emailGroup.email'] }}
             </span>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                for="confirmEmailId">Email</label>
+                for="confirmEmailId">Confirm Email</label>
           <div class="col-md-8">
             <input class="form-control"
                   id="confirmEmailId"
                   type="email"
                   placeholder="Confirm Email (required)"
                   formControlName="confirmEmail"
-                  [ngClass]="{ 'is-invalid': emailMessage }" />
+                  [ngClass]="{ 'is-invalid': messages['emailGroup.confirmEmail'] }" />
             <span class="invalid-feedback">
-              {{ emailMessage }}
+              {{ messages['emailGroup.confirmEmail'] }}
             </span>
           </div>
         </div>
@@ -98,11 +83,9 @@
                  type="tel"
                  placeholder="Phone"
                  formControlName="phone"
-                 [ngClass]="{'is-invalid': !customerForm.get('phone').valid }" />
+                 [ngClass]="{'is-invalid': messages['phone'] }" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('phone').errors?.required">
-              Please enter your phone number.
-            </span>
+            {{ messages['phone'] }}
           </span>
         </div>
       </div>
@@ -136,11 +119,9 @@
                  id="ratingId"
                  type="number"
                  formControlName="rating"
-                 [ngClass]="{'is-invalid': (customerForm.get('rating').touched || customerForm.get('rating').dirty) && !customerForm.get('rating').valid }" />
+                 [ngClass]="{'is-invalid': messages['rating'] }" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('rating').errors?.range">
-              Please rate your experience from 1 to 5.
-            </span>
+            {{ messages['rating'] }}
           </span>
         </div>
       </div>
