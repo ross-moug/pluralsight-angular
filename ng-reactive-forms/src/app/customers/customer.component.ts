@@ -8,8 +8,9 @@ import {
   FormControl,
   FormBuilder,
   Validators,
-  ValidatorFn
-} from '@angular/forms';
+  ValidatorFn,
+  FormArray
+} from "@angular/forms";
 import { debounceTime } from 'rxjs/operators';
 
 import { Customer } from './customer';
@@ -94,7 +95,7 @@ export class CustomerComponent implements OnInit {
       notification: 'email',
       rating: [null, range(1, 5)],
       sendCatalog: true,
-      addresses: this.createAddressGroup(),
+      addresses: this.builder.array([this.createAddressGroup()]),
     });
 
     this.customerForm.get('notification').valueChanges.subscribe(
@@ -142,6 +143,10 @@ export class CustomerComponent implements OnInit {
       city: '',
       postCode: '',
     });
+  }
+
+  get addresses(): FormArray {
+    return <FormArray> this.customerForm.get('addresses');
   }
 
   private setMessage(control: AbstractControl, controlKey: string): void {
