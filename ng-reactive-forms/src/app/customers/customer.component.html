@@ -17,7 +17,7 @@
                  type="text"
                  placeholder="First Name (required)"
                  formControlName="firstName"
-                 [ngClass]="{'is-invalid': messages['firstName'] }" />
+                 [ngClass]="{'is-invalid': messages['firstName'] }"/>
           <span class="invalid-feedback">
               {{ messages['firstName'] }}
           </span>
@@ -33,7 +33,7 @@
                  type="text"
                  placeholder="Last Name (required)"
                  formControlName="lastName"
-                 [ngClass]="{'is-invalid': messages['lastName'] }" />
+                 [ngClass]="{'is-invalid': messages['lastName'] }"/>
           <span class="invalid-feedback">
               {{ messages['lastName'] }}
           </span>
@@ -43,14 +43,14 @@
       <div formGroupName="emailGroup">
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                for="emailId">Email</label>
+                 for="emailId">Email</label>
           <div class="col-md-8">
             <input class="form-control"
-                  id="emailId"
-                  type="email"
-                  placeholder="Email (required)"
-                  formControlName="email"
-                  [ngClass]="{'is-invalid': messages['emailGroup.email'] }" />
+                   id="emailId"
+                   type="email"
+                   placeholder="Email (required)"
+                   formControlName="email"
+                   [ngClass]="{'is-invalid': messages['emailGroup.email'] }"/>
             <span class="invalid-feedback">
               {{ messages['emailGroup.email'] }}
             </span>
@@ -59,14 +59,14 @@
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                for="confirmEmailId">Confirm Email</label>
+                 for="confirmEmailId">Confirm Email</label>
           <div class="col-md-8">
             <input class="form-control"
-                  id="confirmEmailId"
-                  type="email"
-                  placeholder="Confirm Email (required)"
-                  formControlName="confirmEmail"
-                  [ngClass]="{ 'is-invalid': messages['emailGroup.confirmEmail'] }" />
+                   id="confirmEmailId"
+                   type="email"
+                   placeholder="Confirm Email (required)"
+                   formControlName="confirmEmail"
+                   [ngClass]="{ 'is-invalid': messages['emailGroup.confirmEmail'] }"/>
             <span class="invalid-feedback">
               {{ messages['emailGroup.confirmEmail'] }}
             </span>
@@ -83,7 +83,7 @@
                  type="tel"
                  placeholder="Phone"
                  formControlName="phone"
-                 [ngClass]="{'is-invalid': messages['phone'] }" />
+                 [ngClass]="{'is-invalid': messages['phone'] }"/>
           <span class="invalid-feedback">
             {{ messages['phone'] }}
           </span>
@@ -119,7 +119,7 @@
                  id="ratingId"
                  type="number"
                  formControlName="rating"
-                 [ngClass]="{'is-invalid': messages['rating'] }" />
+                 [ngClass]="{'is-invalid': messages['rating'] }"/>
           <span class="invalid-feedback">
             {{ messages['rating'] }}
           </span>
@@ -139,109 +139,85 @@
         </div>
       </div>
 
-      <!-- <div *ngIf="customer.sendCatalog">
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label pt-0">Address Type</label>
-          <div class="col-md-8">
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input"
-                       id="addressType1Id"
-                       type="radio"
-                       value="home"
-                       [(ngModel)]="customer.addressType"
-                       name="addressType"> Home
-              </label>
+      <div *ngIf="customerForm.get('sendCatalog').value">
+        <div formGroupName="addresses">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label pt-0">Address Type</label>
+            <div class="col-md-8">
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input"
+                         id="addressType1Id"
+                         type="radio"
+                         value="home"
+                         formControlName="addressType"> Home
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input"
+                         id="addressType2Id"
+                         type="radio"
+                         value="work" å
+                         formControlName="addressType"> Work
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input"
+                         id="addressType3Id"
+                         type="radio"
+                         value="other"
+                         formControlName="addressType"> Other
+                </label>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input"
-                       id="addressType1Id"
-                       type="radio"
-                       value="work"
-                       [(ngModel)]="customer.addressType"
-                       name="addressType"> Work
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input"
-                       id="addressType1Id"
-                       type="radio"
-                       value="other"
-                       [(ngModel)]="customer.addressType"
-                       name="addressType"> Other
-              </label>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="street1Id">Street Address 1</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="street1Id"
+                     type="text"
+                     placeholder="Street address"
+                     formControlName="street1">
             </div>
           </div>
-        </div>
 
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label"
-                 for="street1Id">Street Address 1</label>
-          <div class="col-md-8">
-            <input class="form-control"
-                   id="street1Id"
-                   type="text"
-                   placeholder="Street address"
-                   [(ngModel)]="customer.street1"
-                   name="street1">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="street2Id">Street Address 2</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="street2Id"
+                     type="text"
+                     placeholder="Street address (second line)"
+                     formControlName="street2">
+            </div>
           </div>
-        </div>
 
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label"
-                 for="street2Id">Street Address 2</label>
-          <div class="col-md-8">
-            <input class="form-control"
-                   id="street2Id"
-                   type="text"
-                   placeholder="Street address (second line)"
-                   [(ngModel)]="customer.street2"
-                   name="street2">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="cityId">City, Post Code</label>
+            <div class="col-md-5">
+              <input class="form-control"
+                     id="cityId"
+                     type="text"
+                     placeholder="City"
+                     formControlName="city">
+            </div>
+            <div class="col-md-3">
+              <input class="form-control"
+                     id="postCodeId"
+                     type="text"
+                     placeholder="Post code"
+                     formControlName="postCode">
+            </div>
           </div>
         </div>
-
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label"
-                 for="cityId">City, State, Zip Code</label>
-          <div class="col-md-3">
-            <input class="form-control"
-                   id="cityId"
-                   type="text"
-                   placeholder="City"
-                   [(ngModel)]="customer.city"
-                   name="city">
-          </div>
-          <div class="col-md-3">
-            <select class="form-control"
-                    id="stateId"
-                    [(ngModel)]="customer.state"
-                    name="state">
-              <option value=""
-                      disabled
-                      selected
-                      hidden>Select a State...</option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <input class="form-control"
-                   id="zipId"
-                   type="number"
-                   placeholder="Zip Code"
-                   [(ngModel)]="customer.zip"
-                   name="zip">
-          </div>
-        </div>
-      </div> -->
+      </div>
 
       <div class="form-group row mb-2">
         <div class="offset-md-2 col-md-4">
