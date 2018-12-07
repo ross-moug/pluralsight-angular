@@ -94,13 +94,7 @@ export class CustomerComponent implements OnInit {
       notification: 'email',
       rating: [null, range(1, 5)],
       sendCatalog: true,
-      addresses: this.builder.group({
-        addressType: 'home',
-        street1: '',
-        street2: '',
-        city: '',
-        postCode: '',
-      }),
+      addresses: this.createAddressGroup(),
     });
 
     this.customerForm.get('notification').valueChanges.subscribe(
@@ -112,8 +106,8 @@ export class CustomerComponent implements OnInit {
       emailControl.valueChanges
         .pipe(debounceTime(1000))
         .subscribe(
-        () => this.setMessage(emailControl, key)
-      );
+          () => this.setMessage(emailControl, key)
+        );
     });
   }
 
@@ -138,6 +132,16 @@ export class CustomerComponent implements OnInit {
       phoneControl.clearValidators();
     }
     phoneControl.updateValueAndValidity();
+  }
+
+  createAddressGroup(): FormGroup {
+    return this.builder.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      postCode: '',
+    });
   }
 
   private setMessage(control: AbstractControl, controlKey: string): void {
