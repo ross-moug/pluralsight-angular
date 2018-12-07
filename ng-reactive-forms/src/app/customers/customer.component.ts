@@ -135,14 +135,8 @@ export class CustomerComponent implements OnInit {
     phoneControl.updateValueAndValidity();
   }
 
-  createAddressGroup(): FormGroup {
-    return this.builder.group({
-      addressType: 'home',
-      street1: '',
-      street2: '',
-      city: '',
-      postCode: '',
-    });
+  addAddress(): void {
+    this.addresses.push(this.createAddressGroup());
   }
 
   get addresses(): FormArray {
@@ -157,5 +151,15 @@ export class CustomerComponent implements OnInit {
       this.messages[controlKey] = Object.keys(control.errors)
         .map(key => this.messages[controlKey] += this.validationMessages[controlKey][key]).join(' ');
     }
+  }
+
+  private createAddressGroup(): FormGroup {
+    return this.builder.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      postCode: '',
+    });
   }
 }
