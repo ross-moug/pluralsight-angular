@@ -10,6 +10,7 @@ import {
   Validators,
   ValidatorFn
 } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 import { Customer } from './customer';
 
@@ -101,7 +102,9 @@ export class CustomerComponent implements OnInit {
 
     Object.keys(this.validationMessages).forEach(key => {
       const emailControl: FormControl = <FormControl>this.customerForm.get(key);
-      emailControl.valueChanges.subscribe(
+      emailControl.valueChanges
+        .pipe(debounceTime(1000))
+        .subscribe(
         () => this.setMessage(emailControl, key)
       );
     });
